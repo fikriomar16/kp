@@ -1,0 +1,19 @@
+.box{ 
+	background-color:#fff; 
+	overflow: hidden; 
+	height:250px; 
+	-webkit-border-radius: 5px; 
+	-moz-border-radius: 5px; 
+	-ms-border-radius: 5px; 
+	-o-border-radius: 5px; 
+	border-radius:5px; 
+	-webkit-box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.3); 
+	-moz-box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.3); 
+	box-shadow: 0px 3px 2px 0px rgba(0,0,0,0.3); } 
+
+	.box img{ width:101%; height:150px; } 
+	.box h3{ padding:15px; margin:0px; } 
+	.box p{ overflow:hidden; height:100px; padding-left:15px; padding-right:15px; margin:0px; } 
+	.desc{ height:150px; border-bottom:1px solid #ddd; } .likes{ float:left; padding:15px; margin:0px; } 
+	.prize{ float:right; padding:15px; margin:0px; }
+	.boxtitle{padding: 15px; font-weight: bold;color: #4F754C}
