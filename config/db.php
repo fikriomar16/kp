@@ -37,6 +37,62 @@ class user {
 	}
 }
 
+class dashboard {
+	public $koneksi;
+
+	function __construct($con){
+		$this->koneksi = $con;
+	}
+
+	function supplier(){
+		$select = $this->koneksi->query("SELECT COUNT(*) AS jumlah FROM supplier");
+		while ($fetch = $select->fetch_assoc()) {
+			$data[] = $fetch;
+		}
+		return $data;
+	}
+
+	function barang(){
+		$select = $this->koneksi->query("SELECT COUNT(*) AS jumlah FROM barang");
+		while ($fetch = $select->fetch_assoc()) {
+			$data[] = $fetch;
+		}
+		return $data;
+	}
+
+	function jenis(){
+		$select = $this->koneksi->query("SELECT COUNT(*) AS jumlah FROM jenisbarang");
+		while ($fetch = $select->fetch_assoc()) {
+			$data[] = $fetch;
+		}
+		return $data;
+	}
+
+	function satuan(){
+		$select = $this->koneksi->query("SELECT COUNT(*) AS jumlah FROM satuan");
+		while ($fetch = $select->fetch_assoc()) {
+			$data[] = $fetch;
+		}
+		return $data;
+	}
+
+	function masuk(){
+		$select = $this->koneksi->query("SELECT COUNT(*) AS jumlah FROM brgmasuk");
+		while ($fetch = $select->fetch_assoc()) {
+			$data[] = $fetch;
+		}
+		return $data;
+	}
+
+	function keluar(){
+		$select = $this->koneksi->query("SELECT COUNT(*) AS jumlah FROM brgkeluar");
+		while ($fetch = $select->fetch_assoc()) {
+			$data[] = $fetch;
+		}
+		return $data;
+	}
+}
+
 class data {
 	public $koneksi;
 
@@ -66,7 +122,7 @@ class data {
 	}
 
 	function masuk($bulan){
-		$select = $this->koneksi->query("SELECT barang.kodebrg, brgmasuk.tglmasuk, barang.namabrg, brgmasuk.jumlah, satuan.namasatuan, barang.harga, (barang.harga*brgmasuk.jumlah) AS subtotal, supplier.namasup FROM brgmasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN satuan ON barang.kodesatuan = satuan.kodesatuan INNER JOIN supplier ON barang.kodesup = supplier.kodesup WHERE month(brgmasuk.tglmasuk)='$bulan' ORDER BY barang.kodebrg ASC");
+		$select = $this->koneksi->query("SELECT barang.kodebrg, brgmasuk.tglmasuk, barang.namabrg, brgmasuk.jumlah, satuan.namasatuan, barang.harga, (barang.harga*brgmasuk.jumlah) AS subtotal, supplier.namasup FROM brgmasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN satuan ON barang.kodesatuan = satuan.kodesatuan INNER JOIN supplier ON barang.kodesup = supplier.kodesup WHERE month(brgmasuk.tglmasuk)='$bulan' AND brgmasuk.jumlah!='0' ORDER BY barang.kodebrg ASC");
 		while ($fetch = $select->fetch_assoc()) {
 			$data[] = $fetch;
 		}
@@ -240,4 +296,5 @@ class data {
 }
 $user = new user($con);
 $data = new data($con);
+$dashboard = new dashboard($con);
 ?>

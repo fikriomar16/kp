@@ -25,7 +25,7 @@ if (!isset($_SESSION['id'])) {
 	<div id="wrapper">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
-				<li class="sidebar-brand" style="margin-bottom: 100px">
+				<li class="sidebar-brand mt-4" style="margin-bottom: 100px">
 					<center>
 						<img style="width: auto;height: 100px;" src="../../assets/images/puskesmas.png">
 						<label><i class="fa fa-stethoscope"></i> Puskesmas Mlati I</label>
@@ -83,7 +83,7 @@ if (!isset($_SESSION['id'])) {
 			</ul>
 		</div>
 		<div id="page-content-wrapper">
-			<button href="#menu-toggle" class="btn btn-success" id="menu-toggle" data-toggle="tooltip" data-placement="Right" title=""><i class="fa fa-bars"></i></button>
+			<button href="#menu-toggle" class="btn btn-success btn-sm" id="menu-toggle" data-toggle="tooltip" data-placement="Right" title=""><i class="fa fa-bars"></i></button>
 			<?php
 			if ($_SESSION['id']) {
 			?>
@@ -119,6 +119,16 @@ if (!isset($_SESSION['id'])) {
 			</div>
 		</div>
 	</div>
+	<!--
+	<center>
+		<footer class="footer fixed-bottom" style="background-color: #222d32;">
+			<div class="container-fluid">
+				<span class="text-white">Puskesmas Mlati I, Jalan Wijaya Kusuma, Sinduadi, Mlati, Kabupaten Sleman, Yogyakarta</span><br>
+				<span class="text-white">Copyright &copy; <a href="https://github.com/fikriomar16">Mohammad Fikri Omar</a>, 2018</span>
+			</div>
+		</footer>
+	</center>
+	-->
 	<script src="../../assets/js/popper.min.js"></script>
 	<script src="../../assets/js/jquery.min.js"></script>
 	<script src="../../assets/js/bootstrap.min.js"></script>
@@ -127,6 +137,7 @@ if (!isset($_SESSION['id'])) {
 	<script src="../../assets/datatable/dataTables.responsive.min.js"></script>
 	<script src="../../assets/datatable/responsive.bootstrap4.min.js"></script>
 	<script>
+		$("#wrapper").toggleClass("toggled");
 		$(document).ready(function(){
 			$('[data-toggle="tooltip"]').tooltip();
 		});

@@ -28,7 +28,7 @@ if ($_SESSION['hakakses']!=="admin") {
 	<div id="wrapper">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
-				<li class="sidebar-brand" style="margin-bottom: 100px">
+				<li class="sidebar-brand mt-4" style="margin-bottom: 100px">
 					<center>
 						<img style="width: auto;height: 100px;" src="../../assets/images/puskesmas.png">
 						<label><i class="fa fa-stethoscope"></i> Puskesmas Mlati I</label>
@@ -38,7 +38,7 @@ if ($_SESSION['hakakses']!=="admin") {
 					<a href="./"><i class="fa fa-tachometer"></i>&nbsp;&nbsp;Dashboard</a>
 				</li>
 				<li>
-					<a href="index.php?page=supplier"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Data Supplier</a>
+					<a href="index.php?page=supplier"><i class="fa fa-truck"></i>&nbsp;&nbsp;Data Supplier</a>
 				</li>
 				<li class="active">
 					<a href="#brgSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle"><i class="fa fa-th-list"></i>&nbsp;&nbsp;Data Barang</a>
@@ -85,7 +85,7 @@ if ($_SESSION['hakakses']!=="admin") {
 			</ul>
 		</div>
 		<div id="page-content-wrapper">
-			<button href="#menu-toggle" class="btn btn-success" id="menu-toggle" data-toggle="tooltip" data-placement="Right" title=""><i class="fa fa-bars"></i></button>
+			<button href="#menu-toggle" class="btn btn-success btn-sm" id="menu-toggle" data-toggle="tooltip" data-placement="Right" title=""><i class="fa fa-bars"></i></button>
 			<?php
 			if ($_SESSION['id']) {
 			?>
@@ -131,6 +131,7 @@ if ($_SESSION['hakakses']!=="admin") {
 	<script src="../../assets/datatable/dataTables.responsive.min.js"></script>
 	<script src="../../assets/datatable/responsive.bootstrap4.min.js"></script>
 	<script>
+		$("#wrapper").toggleClass("toggled");
 		$(document).ready(function(){
 			$('[data-toggle="tooltip"]').tooltip();
 		});

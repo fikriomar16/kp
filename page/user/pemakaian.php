@@ -40,7 +40,7 @@ if (!$query) {
 	}
 	?>
 	<div class="table-responsive">
-		<table class="table table-hover" id="tabbrgkeluar">
+		<table class="table table-hover table-striped" id="tabbrgkeluar">
 			<thead class="thead-dark">
 				<tr>
 					<th>No</th>

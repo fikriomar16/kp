@@ -64,7 +64,7 @@ if (!$query) {
 	}
 </script>
 <center>
-	<h4><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Daftar Supplier</h4>
+	<h4>Daftar Supplier</h4>
 </center>
 <div class="container-fluid mb-auto">
 	<button type="button" class="btn btn-info btn-sm mb-2 float-right" onclick="showmodalsup();" data-toggle="tooltip" data-placement="left" title="Tambah Data">
