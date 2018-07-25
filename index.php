@@ -91,22 +91,6 @@ include 'config/db.php';
 		$(document).ready(function(){
 			$('[data-toggle="tooltip"]').tooltip();
 		});
-		$("#menu-toggle").click(function(e) {
-			e.preventDefault();
-			$("#wrapper").toggleClass("toggled");
-		});
-		$(document).ready(function() {
-			 $('#tabsup').DataTable();
-		} );
-		$(document).ready(function() {
-			 $('#tabbrg').DataTable();
-		} );
-		$(document).ready(function() {
-			 $('#tabsat').DataTable();
-		} );
-		$(document).ready(function() {
-			 $('#tabjen').DataTable();
-		} );
     </script>
 </body>
 </html>

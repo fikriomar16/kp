@@ -51,15 +51,22 @@ $result = mysqli_fetch_array($query);
 						<td><?php echo $value['namabrg']; ?></td>
 						<td><?php echo $value['jumlah']; ?></td>
 						<td><?php echo $value['namasatuan']; ?></td>
-						<td><?php echo $value['harga']; ?></td>
-						<td><?php echo $value['subtotal']; ?></td>
+						<td><?php echo number_format($value['harga'], 0, ',', '.'); ?></td>
+						<td><?php echo number_format($value['subtotal'], 0, ',', '.'); ?></td>
 						<td><?php echo $value['namasup']; ?></td>
 					</tr>
 					<?php
 					$i++;
+					$total += $value['subtotal'];
 					endforeach;
 					?>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="7" align="right">Total :</td>
+						<td colspan="2"><?php echo number_format($total, 0, ',', '.'); ?></td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 	</div>

@@ -115,7 +115,7 @@ if (!$query) {
 					<td><?php echo $value[1] ?></td>
 					<td><?php echo $value[2] ?></td>
 					<td><?php echo $value[3] ?></td>
-					<td><?php echo $value[4] ?></td>
+					<td><?php echo number_format($value[4], 0, ',', '.'); ?></td>
 					<td><?php echo $value[5] ?></td>
 					<td>
 						<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail Barang" onclick="showmodaldet('<?php echo $value[0] ?>','<?php echo $value[1] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>,<?php echo $value[4] ?>,'<?php echo $value[5] ?>','<?php echo $value[6] ?>','<?php echo $value[7] ?>','<?php echo $value[8] ?>');">
@@ -202,7 +202,7 @@ if (!$query) {
 						</div>
 					</div>
 					<div class="form-group">
-						<input type="date" name="tglmsk" id="tglmsk" class="form-control" required>
+						<input type="date" name="tglmsk" id="tglmsk" class="form-control" max="<?php echo date("Y-m-d");?>" required>
 					</div>
 					<div class="form-group">
 						<select class="form-control text-center" name="sup" id="sup" required>
@@ -302,7 +302,7 @@ if (!$query) {
 						</div>
 					</div>
 					<div class="form-group">
-						<input type="date" name="edttglmsk" id="edttglmsk" class="form-control" required>
+						<input type="date" name="edttglmsk" id="edttglmsk" class="form-control" max="<?php echo date("Y-m-d");?>" required>
 					</div>
 					<div class="form-group">
 						<select class="form-control text-center" name="edtsup" id="edtsup" required>

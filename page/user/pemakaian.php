@@ -97,7 +97,7 @@ if (!$query) {
 						</div>
 						<div class="col">
 							<div class="form-group">
-								<input type="date" name="tglkeluar" id="tglkeluar" class="form-control" required>
+								<input type="date" name="tglkeluar" id="tglkeluar" class="form-control" max="<?php echo date("Y-m-d");?>" required>
 							</div>
 						</div>
 					</div>

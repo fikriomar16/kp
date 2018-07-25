@@ -50,7 +50,7 @@
 		<footer class="footer fixed-bottom" style="background-color: #222d32;">
 			<div class="container-fluid">
 				<span class="text-white">Puskesmas Mlati I, Jalan Wijaya Kusuma, Sinduadi, Mlati, Kabupaten Sleman, Yogyakarta</span><br>
-				<span class="text-white">Copyright &copy; <a href="https://github.com/fikriomar16">Mohammad Fikri Omar</a>, 2018</span>
+				<span class="text-white">Copyright &copy; <a href="https://github.com/fikriomar16" target="_blank">Mohammad Fikri Omar</a>, 2018</span>
 			</div>
 		</footer>
 	</center>

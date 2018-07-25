@@ -23,6 +23,11 @@ if ($_SESSION['hakakses']!=="admin") {
 	<link rel="stylesheet" href="../../assets/datatable/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="../../assets/datatable/responsive.bootstrap4.min.css">
 	<!--<link rel="stylesheet" href="assets/datatable/bootstrap.min.css">-->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#wrapper").toggleClass("toggled");
+		});
+	</script>
 </head>
 <body style="background-color: #e7e8eb;">
 	<div id="wrapper">
@@ -101,22 +106,22 @@ if ($_SESSION['hakakses']!=="admin") {
 					include 'dashboard.php';
 				} else {
 					if ($_GET['page']=="supplier") {
-						include 'supplier.php';
+						include_once 'supplier.php';
 					}
 					elseif ($_GET['page']=="inputbrg") {
-						include 'inputbrg.php';
+						include_once 'inputbrg.php';
 					}
 					elseif ($_GET['page']=="penambahan") {
-						include 'penambahan.php';
+						include_once 'penambahan.php';
 					}
 					elseif ($_GET['page']=="satuan") {
-						include 'satuan.php';
+						include_once 'satuan.php';
 					}
 					elseif ($_GET['page']=="jenis") {
-						include 'jenis.php';
+						include_once 'jenis.php';
 					}
 					elseif ($_GET['page']=="admin") {
-						include 'admin.php';
+						include_once 'admin.php';
 					}
 				}		
 				?>
@@ -141,17 +146,9 @@ if ($_SESSION['hakakses']!=="admin") {
 		});
 		$(document).ready(function() {
 			 $('#tabsup').DataTable();
-		} );
-		$(document).ready(function() {
 			 $('#tabbrg').DataTable();
-		} );
-		$(document).ready(function() {
 			 $('#tabsat').DataTable();
-		} );
-		$(document).ready(function() {
 			 $('#tabjen').DataTable();
-		} );
-		$(document).ready(function() {
 			 $('#admintab').DataTable();
 		} );
     </script>

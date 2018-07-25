@@ -20,6 +20,11 @@ if (!isset($_SESSION['id'])) {
 	<link rel="stylesheet" href="../../assets/datatable/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="../../assets/datatable/responsive.bootstrap4.min.css">
 	<!--<link rel="stylesheet" href="assets/datatable/bootstrap.min.css">-->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#wrapper").toggleClass("toggled");
+		});
+	</script>
 </head>
 <body style="background-color: #e7e8eb;">
 	<div id="wrapper">
@@ -147,8 +152,6 @@ if (!isset($_SESSION['id'])) {
 		});
 		$(document).ready(function() {
 			 $('#tabbrgmasuk').DataTable();
-		} );
-		$(document).ready(function() {
 			 $('#tabbrgkeluar').DataTable();
 		} );
     </script>

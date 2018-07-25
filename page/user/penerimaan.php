@@ -1,5 +1,5 @@
 <?php
-$sql = "SELECT brgmasuk.kodemasuk,brgmasuk.tglmasuk,barang.namabrg,brgmasuk.jumlah,supplier.namasup,barang.kodebrg FROM brgmasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN supplier ON barang.kodesup = supplier.kodesup ORDER BY brgmasuk.kodemasuk ASC";
+$sql = "SELECT brgmasuk.kodemasuk,brgmasuk.tglmasuk,barang.namabrg,brgmasuk.jumlah,supplier.namasup,barang.kodebrg FROM brgmasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN supplier ON barang.kodesup = supplier.kodesup WHERE brgmasuk.jumlah!='0' ORDER BY brgmasuk.kodemasuk ASC";
 $query = mysqli_query($con, $sql);
 if (!$query) {
     die ('SQL Error: ' . mysqli_error($con));
@@ -95,7 +95,7 @@ if (!$query) {
 						</div>
 						<div class="col">
 							<div class="form-group">
-								<input type="date" name="tglmasuk" id="tglmasuk" class="form-control text-center" required>
+								<input type="date" name="tglmasuk" id="tglmasuk" class="form-control text-center" max="<?php echo date("Y-m-d");?>" required>
 							</div>
 						</div>
 					</div>

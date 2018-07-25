@@ -5,7 +5,7 @@
 			<i class="fa fa-print"></i>&nbsp;Cetak Laporan
 		</div>
 		<div class="card-body">
-			<form method="POST" class="form-group" id="masuk" name="masuk" action="cetak/keluar.php">
+			<form method="POST" class="form-group" id="masuk" name="masuk" action="cetak/keluar.php" target="_blank">
 				<div class="row">
 					<div class="col-3">
 						<div class="form-group">

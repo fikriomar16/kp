@@ -30,7 +30,7 @@ $result = mysqli_fetch_array($query);
 		<p class="float-right">Tanggal : <?php echo date("d/m/Y"); ?></p>
 		<p>Nama Supplier : <?php echo $result['namasup'];?></p>
 		<p>Alamat : <?php echo $result['alamat'];?></p>
-		<p>Menyatakan Bahwa Telah diterima barang-barang di bawah ini :</p>
+		<p>Menyatakan bahwa telah diterima barang-barang di bawah ini :</p>
 		<div class="table-responsive">
 			<table class="table table-bordered table-sm">
 				<thead class="thead-light">
@@ -63,6 +63,35 @@ $result = mysqli_fetch_array($query);
 			</table>
 		</div>
 	</div>
+	<center>
+		<div class="row mt-5">
+			<div class="col">
+				<div class="form-group">
+					<h5>Supplier</h5>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<h5>Petugas</h5>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-5">
+			<div class="col">
+				<div class="form-group">
+					<h5>(...................................)</h5>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<h5>(...................................)</h5>
+				</div>
+			</div>
+		</div>
+	</center>
+	<script type="text/javascript">
+		//window.close();
+	</script>
 	<script src="../../../assets/js/popper.min.js"></script>
 	<script src="../../../assets/js/jquery.min.js"></script>
 	<script src="../../../assets/js/bootstrap.min.js"></script>
