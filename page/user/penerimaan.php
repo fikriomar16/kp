@@ -19,7 +19,13 @@ if (!$query) {
 		$('#deljumlah2').val(jumlah);
 		$('#modaldel').modal('show');
 	}
-	function showmodaldet(foto){
+	function showmodaldet(foto,kodemasuk,namabrg,jumlah,satuan,tglmasuk,supplier){
+		$('#detkodemasuk').text(kodemasuk);
+		$('#detnamabrg').text(namabrg);
+		$('#detjumlah').text(jumlah);
+		$('#detkodesatuan').text(satuan);
+		$('#dettglmsk').text(tglmasuk);
+		$('#detsup').text(supplier);
 		$('#detfoto').text(foto);
 		$('#modaldet').modal('show');
 		var TextInsideP = document.getElementById("detfoto").innerHTML;
@@ -74,7 +80,7 @@ if (!$query) {
 					<td><?php echo $value[3] ?></td>
 					<td><?php echo $value[4] ?></td>
 					<td>
-						<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail Data"  onclick="showmodaldet('<?php echo $value[7] ?>');">
+						<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail Data"  onclick="showmodaldet('<?php echo $value[7] ?>','<?php echo $value[0] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>,'<?php echo $value[6] ?>','<?php echo $value[1] ?>','<?php echo $value[4] ?>');">
 							<i class="fa fa-list"></i>
 						</button>
 						<button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>','<?php echo $value[5] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>);">
