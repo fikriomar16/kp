@@ -80,7 +80,7 @@ if (!$query) {
 		echo "<script>location='index.php?page=inputbrg';</script>";
 	}
 	if (isset($_POST['edt_brg'])) {
-		$data->edt_brg($_POST['edtkodebrg'],$_POST['edtnamabrg'],$_POST['edtjenis'],$_POST['edtjumlah'],$_POST['edtharga'],$_POST['edtsatuan'],$_POST['edttglmsk'],$_POST['edtsup']);
+		$data->edt_brg($_POST['edtkodebrg'],$_POST['edtnamabrg'],$_POST['edtjenis'],$_POST['edtjumlah'],$_POST['edtharga'],$_POST['edtsatuan'],$_POST['edttglmsk'],$_POST['edtsup'],$_FILES['edtfoto']);
 		echo '<script>sukses_edt()</script>';
 		echo "<script>location='index.php?page=inputbrg';</script>";
 	}
@@ -248,7 +248,7 @@ if (!$query) {
 				</button>
 			</div>
 			<div class="modal-body">
-				<form id="form-edt" method="POST">
+				<form id="form-edt" method="POST" enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-5">
 							<div class="form-group">
@@ -313,18 +313,18 @@ if (!$query) {
 							<?php endforeach; ?>
 						</select>
 					</div>
-					<!--<div class="form-group">
+					<div class="form-group">
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								 <span class="input-group-text"><i class="fa fa-image"></i></span>
 							</div>
 							<div class="custom-file">
 								<input type="file" class="custom-file-input" id="edtfoto" name="edtfoto" onchange="edtgetkode(event)">
-								<label class="custom-file-label" for="foto" id="label"><i class="fa fa-folder-open"></i>&nbsp;Pilih Gambar</label>
+								<label class="custom-file-label" for="edtfoto" id="label"><i class="fa fa-folder-open"></i>&nbsp;Pilih Gambar</label>
 							</div>
 						</div>
 						<input type="text" name="edtlabelfoto" id="edtlabelfoto" readonly class="form-control">
-					</div>-->
+					</div>
 					<div class="modal-footer form-group">
 						<button class="btn btn-sm btn-primary" type="submit" name="edt_brg" id="edt_brg">
 							<i class="fa fa-save"></i>&nbsp;Update
@@ -348,7 +348,7 @@ if (!$query) {
 				</button>
 			</div>
 			<div class="modal-body">
-				<form id="form-del" method="POST">
+				<form id="form-del" method="POST" enctype="multipart/form-data">
 					<h4 align="center" style="color: red;">Yakin ingin menghapus data ini ?</h4>
 					<div class="row">
 						<div class="col">

@@ -1,5 +1,5 @@
 <?php
-$sql = "SELECT brgmasuk.kodemasuk,brgmasuk.tglmasuk,barang.namabrg,brgmasuk.jumlah,supplier.namasup,barang.kodebrg FROM brgmasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN supplier ON barang.kodesup = supplier.kodesup WHERE brgmasuk.jumlah!='0' ORDER BY brgmasuk.kodemasuk ASC";
+$sql = "SELECT brgmasuk.kodemasuk,brgmasuk.tglmasuk,barang.namabrg,brgmasuk.jumlah,supplier.namasup,barang.kodebrg,satuan.namasatuan,barang.foto FROM brgmasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN supplier ON barang.kodesup = supplier.kodesup INNER JOIN satuan ON barang.kodesatuan = satuan.kodesatuan WHERE brgmasuk.jumlah!='0' ORDER BY brgmasuk.kodemasuk ASC";
 $query = mysqli_query($con, $sql);
 if (!$query) {
     die ('SQL Error: ' . mysqli_error($con));
@@ -19,6 +19,15 @@ if (!$query) {
 		$('#deljumlah2').val(jumlah);
 		$('#modaldel').modal('show');
 	}
+	function showmodaldet(foto){
+		$('#detfoto').text(foto);
+		$('#modaldet').modal('show');
+		var TextInsideP = document.getElementById("detfoto").innerHTML;
+		document.getElementById("image-id").src = "../../assets/images/barang/"+TextInsideP;
+	}
+	function getkode(e) {
+		document.getElementById('labelfoto').value = e.target.value;
+	}
 </script>
 <center>
 	<h4>Form Penerimaan Barang</h4>
@@ -29,7 +38,7 @@ if (!$query) {
 	</button>
 	<?php
 	if (isset($_POST['add_brgin'])) {
-		$data->add_brgin($_POST['kodemasuk'],$_POST['tglmasuk'],$_POST['kodebrg'],$_POST['jumlah']);
+		$data->add_brgin($_POST['kodemasuk'],$_POST['tglmasuk'],$_POST['kodebrg'],$_POST['jumlah'],$_FILES['foto']);
 		echo '<script>swal("Berhasil Menginputkan Data")</script>';
 		echo "<script>location='index.php?page=penerimaan';</script>";
 	}
@@ -65,6 +74,9 @@ if (!$query) {
 					<td><?php echo $value[3] ?></td>
 					<td><?php echo $value[4] ?></td>
 					<td>
+						<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail Data"  onclick="showmodaldet('<?php echo $value[7] ?>');">
+							<i class="fa fa-list"></i>
+						</button>
 						<button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>','<?php echo $value[5] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>);">
 							<i class="fa fa-trash"></i>
 						</button>
@@ -86,7 +98,7 @@ if (!$query) {
 				<h5 class="modal-title text-center col-12" id="modaltitlesup">Input Barang Masuk</h5>
 			</div>
 			<div class="modal-body">
-				<form method="POST" id="form-brg">
+				<form method="POST" id="form-brg" enctype="multipart/form-data">
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
@@ -116,6 +128,18 @@ if (!$query) {
 								<input type="number" name="jumlah" id="jumlah" class="form-control text-center" placeholder="Jml" required>
 							</div>
 						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								 <span class="input-group-text"><i class="fa fa-image"></i></span>
+							</div>
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" id="foto" name="foto" onchange="getkode(event)">
+								<label class="custom-file-label" for="foto" id="label"><i class="fa fa-folder-open"></i>&nbsp;Pilih Gambar</label>
+							</div>
+						</div>
+						<input type="hidden" name="labelfoto" id="labelfoto" readonly class="form-control">
 					</div>
 					<div class="modal-footer form-group">
 						<button class="btn btn-sm btn-success" type="submit" name="add_brgin" id="add_brgin">
@@ -172,6 +196,77 @@ if (!$query) {
 						</button>
 						<button class="btn btn-sm btn-outline-primary" type="submit" data-dismiss="modal">
 							<i class="fa fa-close"></i>&nbsp;Batal
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modaldet" tabindex="-1" role="dialog" aria-labelledby="DialogModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="background-color: #007bff; color: #fff;">
+				<h5 class="modal-title" id="modaltitlesup">Detail Data Barang</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="close">
+					<span aria-hidden="true" style="color: #fff">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="form-det" method="POST">
+					<div class="row">
+						<div class="col-4">
+							<p>Kode Masuk :</p>
+						</div>
+						<div class="col">
+							<p id="detkodemasuk"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4">
+							<p>Nama Barang :</p>
+						</div>
+						<div class="col">
+							<p id="detnamabrg"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4">
+							<p>Jumlah Barang :</p>
+						</div>
+						<div class="col">
+							<p id="detjumlah"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4">
+							<p>Satuan :</p>
+						</div>
+						<div class="col">
+							<p id="detkodesatuan"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4">
+							<p>Tgl Masuk :</p>
+						</div>
+						<div class="col">
+							<p id="dettglmsk"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-4">
+							<p>Supplier :</p>
+						</div>
+						<div class="col">
+							<p id="detsup"></p>
+						</div>
+					</div>
+					<p hidden id="detfoto"></p>
+					<center><img id="image-id" style="width: auto;height: 170px;" src="../../assets/images/barang/default.png"></center>
+					<div class="modal-footer form-group">
+						<button class="btn btn-sm btn-success" type="submit" data-dismiss="modal">
+							<i class="fa fa-check"></i>&nbsp;OK
 						</button>
 					</div>
 				</form>

@@ -63,6 +63,7 @@ $result = mysqli_fetch_array($query);
 			</table>
 		</div>
 	</div>
+	<div class="fixed-bottom">
 	<center>
 		<div class="row mt-5">
 			<div class="col">
@@ -89,8 +90,9 @@ $result = mysqli_fetch_array($query);
 			</div>
 		</div>
 	</center>
+	</div>
 	<script type="text/javascript">
-		//window.close();
+		window.close();
 	</script>
 	<script src="../../../assets/js/popper.min.js"></script>
 	<script src="../../../assets/js/jquery.min.js"></script>

@@ -188,48 +188,84 @@ class data {
 	function add_brg($kodebrg,$namabrg,$kodejen,$jumlah,$harga,$kodesatuan,$tglmsk,$kodesup,$foto){
 		$nama_foto=$foto['name'];
 		$lokasi_foto=$foto['tmp_name'];
-
 		if (empty($nama_foto)) {
 			$nama_foto="default.png";
 		}
-
 		if (!empty($lokasi_foto)) {
 			move_uploaded_file($lokasi_foto, "../../assets/images/barang/$nama_foto");
 		}
-
+		//echo $kodebrg." - ".$namabrg." - ".$nama_foto." - ".$foto;
 		$this->koneksi->query("INSERT INTO barang(kodebrg,namabrg,kodejen,jumlah,harga,kodesatuan,tglmsk,kodesup,foto) VALUES ('$kodebrg','$namabrg','$kodejen','$jumlah','$harga','$kodesatuan','$tglmsk','$kodesup','$nama_foto')") or die(mysqli_error($this->koneksi));
 	}
-
 	function select_brg($kodebrg){
 		$select = $this->koneksi->query("SELECT * FROM barang WHERE kodebrg='$kodebrg'");
 		$fetch = $select->fetch_assoc();
         return $fetch;
 	}
-
-	function edt_brg($kodebrg,$namabrg,$kodejen,$jumlah,$harga,$kodesatuan,$tglmsk,$kodesup){
-		/*
+	function edt_brg($kodebrg,$namabrg,$kodejen,$jumlah,$harga,$kodesatuan,$tglmsk,$kodesup,$foto){
 		error_reporting(0); 
         $nama_foto=$foto['name'];
         $lokasi_foto=$foto['tmp_name'];
-        if (empty($nama_foto)) {
-			$nama_foto="default.png";
+        $data_lama = $this->select_brg($kodebrg);
+        $foto_lama = $data_lama['foto'];
 		if (!empty($lokasi_foto)) {
-			$data_lama = $this->select_brg($kodebrg);
-            $foto_lama = $data_lama['foto'];
             if (file_exists("../../assets/images/barang/$foto_lama")) {
             	unlink("../../assets/images/barang/$foto_lama");
             }
             move_uploaded_file($lokasi_foto, "../../assets/images/barang/$nama_foto");
             $this->koneksi->query("UPDATE barang SET namabrg='$namabrg',kodejen='$kodejen',jumlah='$jumlah',harga='$harga',kodesatuan='$kodesatuan',tglmsk='$tglmsk',kodesup='$kodesup',foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
 		} else {
+            if (empty($nama_foto)) {
+            	$nama_foto=$foto_lama;
+            }
 			$this->koneksi->query("UPDATE barang SET namabrg='$namabrg',kodejen='$kodejen',jumlah='$jumlah',harga='$harga',kodesatuan='$kodesatuan',tglmsk='$tglmsk',kodesup='$kodesup',foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
 		}
-		*/
-		$this->koneksi->query("UPDATE barang SET namabrg='$namabrg',kodejen='$kodejen',jumlah='$jumlah',harga='$harga',kodesatuan='$kodesatuan',tglmsk='$tglmsk',kodesup='$kodesup' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+	}
+	function del_brg($kodebrg){
+		$data_lama = $this->select_brg($kodebrg);
+		$foto_lama = $data_lama['foto'];
+		if (file_exists("../../assets/images/barang/$foto_lama")) {
+			unlink("../../assets/images/barang/$foto_lama");
+			$this->koneksi->query("DELETE FROM barang WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+		} else {
+			$this->koneksi->query("DELETE FROM barang WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+		}
+	}
+	function add_brgin($kodemasuk,$tglmasuk,$kodebrg,$jumlah,$foto){
+		error_reporting(0); 
+        $nama_foto=$foto['name'];
+        $lokasi_foto=$foto['tmp_name'];
+        $data_lama = $this->select_brg($kodebrg);
+        $foto_lama = $data_lama['foto'];
+		$this->koneksi->query("INSERT INTO brgmasuk(kodemasuk,tglmasuk,kodebrg,jumlah) VALUES ('$kodemasuk','$tglmasuk','$kodebrg','$jumlah')") or die(mysqli_error($this->koneksi));
+		$this->koneksi->query("UPDATE barang SET jumlah=jumlah-'$jumlah' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+		if (!empty($lokasi_foto)) {
+			if (file_exists("../../assets/images/barang/$foto_lama")) {
+            	unlink("../../assets/images/barang/$foto_lama");
+            }
+            move_uploaded_file($lokasi_foto, "../../assets/images/barang/$nama_foto");
+            $this->koneksi->query("UPDATE barang SET foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+		} else {
+			if (empty($nama_foto)) {
+            	$nama_foto=$foto_lama;
+            }
+            $this->koneksi->query("UPDATE barang SET foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+		}		
 	}
 
-	function del_brg($kodebrg){
-		$this->koneksi->query("DELETE FROM barang WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+	function del_brgin($kodemasuk,$kodebrg,$jumlah){
+		$this->koneksi->query("UPDATE barang SET jumlah=jumlah+'$jumlah' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+		$this->koneksi->query("DELETE FROM brgmasuk WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
+	}
+
+	function add_brgout($kodekeluar,$kodemasuk,$tglkeluar,$jumlah,$ket){
+		$this->koneksi->query("INSERT INTO brgkeluar(kodekeluar,kodemasuk,tglkeluar,jumlah,ket) VALUES ('$kodekeluar','$kodemasuk','$tglkeluar','$jumlah','$ket')") or die(mysqli_error($this->koneksi));
+		$this->koneksi->query("UPDATE brgmasuk SET jumlah=jumlah-'$jumlah' WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
+	}
+
+	function del_brgout($kodekeluar,$kodemasuk,$jumlah){
+		$this->koneksi->query("UPDATE brgmasuk SET jumlah=jumlah+'$jumlah' WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
+		$this->koneksi->query("DELETE FROM brgkeluar WHERE kodekeluar='$kodekeluar'") or die(mysqli_error($this->koneksi));
 	}
 
 	function add_sat($kodesatuan,$namasatuan)
@@ -272,26 +308,6 @@ class data {
 
 	function del_user($username){
 		$this->koneksi->query("DELETE FROM user WHERE username='$username'") or die(mysqli_error($this->koneksi));
-	}
-
-	function add_brgin($kodemasuk,$tglmasuk,$kodebrg,$jumlah){
-		$this->koneksi->query("INSERT INTO brgmasuk(kodemasuk,tglmasuk,kodebrg,jumlah) VALUES ('$kodemasuk','$tglmasuk','$kodebrg','$jumlah')") or die(mysqli_error($this->koneksi));
-		$this->koneksi->query("UPDATE barang SET jumlah=jumlah-'$jumlah' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
-	}
-
-	function del_brgin($kodemasuk,$kodebrg,$jumlah){
-		$this->koneksi->query("UPDATE barang SET jumlah=jumlah+'$jumlah' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
-		$this->koneksi->query("DELETE FROM brgmasuk WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
-	}
-
-	function add_brgout($kodekeluar,$kodemasuk,$tglkeluar,$jumlah,$ket){
-		$this->koneksi->query("INSERT INTO brgkeluar(kodekeluar,kodemasuk,tglkeluar,jumlah,ket) VALUES ('$kodekeluar','$kodemasuk','$tglkeluar','$jumlah','$ket')") or die(mysqli_error($this->koneksi));
-		$this->koneksi->query("UPDATE brgmasuk SET jumlah=jumlah-'$jumlah' WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
-	}
-
-	function del_brgout($kodekeluar,$kodemasuk,$jumlah){
-		$this->koneksi->query("UPDATE brgmasuk SET jumlah=jumlah+'$jumlah' WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
-		$this->koneksi->query("DELETE FROM brgkeluar WHERE kodekeluar='$kodekeluar'") or die(mysqli_error($this->koneksi));
 	}
 }
 $user = new user($con);
