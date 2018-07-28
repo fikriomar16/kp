@@ -24,7 +24,7 @@ $result = mysqli_fetch_array($query);
 		</center>
 		<p class="float-right">Tanggal : <?php echo date("d/m/Y"); ?></p>
 		<div class="table-responsive">
-			<table class="table">
+			<table class="table table-sm">
 				<thead class="thead-light">
 					<tr>
 						<th>No</th>

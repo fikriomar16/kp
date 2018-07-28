@@ -80,10 +80,10 @@ if (!$query) {
 					<td><?php echo $value[3] ?></td>
 					<td><?php echo $value[4] ?></td>
 					<td>
-						<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail Data"  onclick="showmodaldet('<?php echo $value[7] ?>','<?php echo $value[0] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>,'<?php echo $value[6] ?>','<?php echo $value[1] ?>','<?php echo $value[4] ?>');">
-							<i class="fa fa-list"></i>
+						<button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail Data"  onclick="showmodaldet('<?php echo $value[7] ?>','<?php echo $value[0] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>,'<?php echo $value[6] ?>','<?php echo $value[1] ?>','<?php echo $value[4] ?>');">
+							<i class="fa fa-eye"></i>
 						</button>
-						<button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>','<?php echo $value[5] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>);">
+						<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>','<?php echo $value[5] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>);">
 							<i class="fa fa-trash"></i>
 						</button>
 					</td>
@@ -108,7 +108,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="kodemasuk" id="kodemasuk" class="form-control text-center" placeholder="Kode Barang Masuk" required>
+								<input type="text" name="kodemasuk" id="kodemasuk" class="form-control text-center text-success" placeholder="Kode Barang Masuk" maxlength="10" required>
 							</div>
 						</div>
 						<div class="col">

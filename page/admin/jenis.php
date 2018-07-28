@@ -85,10 +85,10 @@ if (!$query) {
 					<td><?php echo $value[0] ?></td>
 					<td><?php echo $value[1] ?></td>
 					<td>
-						<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Jenis" onclick="showmodaledt('<?php echo $value[0] ?>','<?php echo $value[1] ?>');">
+						<button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Jenis" onclick="showmodaledt('<?php echo $value[0] ?>','<?php echo $value[1] ?>');">
 							<i class="fa fa-edit"></i>
 						</button>
-						<button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Jenis" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>');">
+						<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Jenis" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>');">
 							<i class="fa fa-trash"></i>
 						</button>
 					</td>
@@ -116,7 +116,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="kodejen" id="kodejen" class="form-control text-center" placeholder="Kode Jenis" required>
+								<input type="text" name="kodejen" id="kodejen" class="form-control text-center" placeholder="Kode Jenis" maxlength="10" required>
 							</div>
 						</div>
 						<div class="col">
@@ -152,7 +152,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="edtkodejen2" id="edtkodejen2" class="form-control text-center" placeholder="Kode Jenis" disabled>
+								<input type="text" name="edtkodejen2" id="edtkodejen2" class="form-control text-center text-primary" placeholder="Kode Jenis" disabled>
 								<input type="hidden" name="edtkodejen" id="edtkodejen" class="form-control text-center" placeholder="Kode Jenis">
 							</div>
 						</div>
@@ -190,7 +190,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="delkodejen2" id="delkodejen2" class="form-control text-center" disabled>
+								<input type="text" name="delkodejen2" id="delkodejen2" class="form-control text-center text-danger" disabled>
 								<input type="hidden" name="delkodejen" id="delkodejen" class="form-control text-center">
 							</div>
 						</div>

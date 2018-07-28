@@ -170,7 +170,7 @@ class data {
 	}
 
 	function showbrgmasuk(){
-		$select = $this->koneksi->query("SELECT brgmasuk.kodemasuk,brgmasuk.tglmasuk,barang.namabrg,brgmasuk.jumlah,satuan.namasatuan FROM brgmasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN satuan ON barang.kodesatuan = satuan.kodesatuan;");
+		$select = $this->koneksi->query("SELECT brgmasuk.kodemasuk,brgmasuk.tglmasuk,barang.namabrg,brgmasuk.jumlah,satuan.namasatuan FROM brgmasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN satuan ON barang.kodesatuan = satuan.kodesatuan WHERE brgmasuk.jumlah!='0';");
 		while ($fetch = $select->fetch_assoc()) {
 			$data[] = $fetch;
 		}

@@ -11,7 +11,8 @@ if (!isset($_SESSION['id'])) {
 <head>
 	<title>Puskesmas Mlati I</title>
 	<link rel="icon" href="../../assets/images/puskesmas.png">
-	<link rel="stylesheet" href="../../assets/css/bootstrap.css">
+	<link rel="stylesheet" href="../../assets/datatable/bootstrap.css">
+	<!--<link rel="stylesheet" href="../../assets/css/bootstrap.css">-->
 	<link rel="stylesheet" href="../../assets/css/simple-sidebar.css">
 	<link rel="stylesheet" href="../../assets/awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="../../assets/css/style.css">
@@ -19,7 +20,6 @@ if (!isset($_SESSION['id'])) {
 	<script src="../../assets/sweetalert/dist/sweetalert2.js"></script>
 	<link rel="stylesheet" href="../../assets/datatable/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="../../assets/datatable/responsive.bootstrap4.min.css">
-	<!--<link rel="stylesheet" href="assets/datatable/bootstrap.min.css">-->
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#wrapper").toggleClass("toggled");
@@ -74,7 +74,7 @@ if (!isset($_SESSION['id'])) {
 				<li>
 					<form method="POST">
 						<center>
-							<button type="submit" class="btn btn-danger mt-4" name="logout" id="logout">
+							<button type="submit" class="btn btn-danger mt-4" name="logout" id="logout" onclick="swal('Berhasil Logout');">
 								<i class="fa fa-hand-o-left"></i>&nbsp;Logout
 							</button>
 							<?php
@@ -89,10 +89,15 @@ if (!isset($_SESSION['id'])) {
 		</div>
 		<div id="page-content-wrapper">
 			<button href="#menu-toggle" class="btn btn-success btn-sm" id="menu-toggle" data-toggle="tooltip" data-placement="Right" title=""><i class="fa fa-bars"></i></button>
+			<button class="btn btn-sm btn-warning float-right ml-2" type="button" onclick="swal('<?php echo date("d M Y") ?>');">
+				<i class="fa fa-clock-o"></i>&nbsp;&nbsp;<?php echo date("d/m/Y"); ?>
+			</button>
 			<?php
 			if ($_SESSION['id']) {
 			?>
-			<a id="log" name="log" href="#" class="btn btn-sm btn-outline-success float-right"><i class="fa fa-user"></i>&nbsp;&nbsp;<?php echo $_SESSION['id']; ?></a>
+			<button class="btn btn-sm btn-outline-success float-right" type="button" onclick="">
+				<i class="fa fa-user"></i>&nbsp;&nbsp;<?php echo $_SESSION['id']; ?>
+			</button>
 			<?php
 			}
 			?>
@@ -145,15 +150,13 @@ if (!isset($_SESSION['id'])) {
 		$("#wrapper").toggleClass("toggled");
 		$(document).ready(function(){
 			$('[data-toggle="tooltip"]').tooltip();
+			$('#tabbrgmasuk').DataTable();
+			$('#tabbrgkeluar').DataTable();
 		});
 		$("#menu-toggle").click(function(e) {
 			e.preventDefault();
 			$("#wrapper").toggleClass("toggled");
 		});
-		$(document).ready(function() {
-			 $('#tabbrgmasuk').DataTable();
-			 $('#tabbrgkeluar').DataTable();
-		} );
     </script>
 </body>
 </html>

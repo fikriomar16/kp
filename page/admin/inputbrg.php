@@ -118,13 +118,13 @@ if (!$query) {
 					<td><?php echo number_format($value[4], 0, ',', '.'); ?></td>
 					<td><?php echo $value[5] ?></td>
 					<td>
-						<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail Barang" onclick="showmodaldet('<?php echo $value[0] ?>','<?php echo $value[1] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>,<?php echo $value[4] ?>,'<?php echo $value[5] ?>','<?php echo $value[6] ?>','<?php echo $value[7] ?>','<?php echo $value[8] ?>');">
+						<button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail Barang" onclick="showmodaldet('<?php echo $value[0] ?>','<?php echo $value[1] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>,<?php echo $value[4] ?>,'<?php echo $value[5] ?>','<?php echo $value[6] ?>','<?php echo $value[7] ?>','<?php echo $value[8] ?>');">
 							<i class="fa fa-list"></i>
 						</button>
-						<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data Barang" onclick="showmodaledt('<?php echo $value[0] ?>','<?php echo $value[1] ?>',<?php echo $value[3] ?>,<?php echo $value[4] ?>);">
+						<button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data Barang" onclick="showmodaledt('<?php echo $value[0] ?>','<?php echo $value[1] ?>',<?php echo $value[3] ?>,<?php echo $value[4] ?>);">
 							<i class="fa fa-edit"></i>
 						</button>
-						<button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Barang" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>');">
+						<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data Barang" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>');">
 							<i class="fa fa-trash"></i>
 						</button>
 					</td>
@@ -153,7 +153,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col-5">
 							<div class="form-group">
-								<input type="text" name="kodebrg" class="form-control text-center" id="kodebrg" placeholder="Kode Barang" required>
+								<input type="text" name="kodebrg" class="form-control text-center" id="kodebrg" placeholder="Kode Barang" maxlength="10" required>
 							</div>
 						</div>
 						<div class="col">
@@ -252,7 +252,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col-5">
 							<div class="form-group">
-								<input type="text" name="edtkodebrg2" class="form-control text-center" id="edtkodebrg2" placeholder="Kode Barang" disabled>
+								<input type="text" name="edtkodebrg2" class="form-control text-center text-primary" id="edtkodebrg2" placeholder="Kode Barang" disabled>
 								<input type="hidden" name="edtkodebrg" class="form-control text-center" id="edtkodebrg" placeholder="Kode Barang">
 							</div>
 						</div>
@@ -323,7 +323,7 @@ if (!$query) {
 								<label class="custom-file-label" for="edtfoto" id="label"><i class="fa fa-folder-open"></i>&nbsp;Pilih Gambar</label>
 							</div>
 						</div>
-						<input type="text" name="edtlabelfoto" id="edtlabelfoto" readonly class="form-control">
+						<input type="hidden" name="edtlabelfoto" id="edtlabelfoto" readonly class="form-control">
 					</div>
 					<div class="modal-footer form-group">
 						<button class="btn btn-sm btn-primary" type="submit" name="edt_brg" id="edt_brg">
@@ -353,7 +353,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input class="form-control text-center" type="text" name="delkodebrg2" id="delkodebrg2" disabled>
+								<input class="form-control text-center text-danger" type="text" name="delkodebrg2" id="delkodebrg2" disabled>
 								<input class="form-control text-center" type="hidden" name="delkodebrg" id="delkodebrg">
 							</div>
 						</div>

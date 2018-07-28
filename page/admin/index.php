@@ -14,7 +14,8 @@ if ($_SESSION['hakakses']!=="admin") {
 <head>
 	<title>Puskesmas Mlati I</title>
 	<link rel="icon" href="../../assets/images/puskesmas.png">
-	<link rel="stylesheet" href="../../assets/css/bootstrap.css">
+	<link rel="stylesheet" href="../../assets/datatable/bootstrap.css">
+	<!--<link rel="stylesheet" href="../../assets/css/bootstrap.css">-->
 	<link rel="stylesheet" href="../../assets/css/simple-sidebar.css">
 	<link rel="stylesheet" href="../../assets/awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="../../assets/css/style.css">
@@ -22,7 +23,6 @@ if ($_SESSION['hakakses']!=="admin") {
 	<script src="../../assets/sweetalert/dist/sweetalert2.js"></script>
 	<link rel="stylesheet" href="../../assets/datatable/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="../../assets/datatable/responsive.bootstrap4.min.css">
-	<!--<link rel="stylesheet" href="assets/datatable/bootstrap.min.css">-->
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#wrapper").toggleClass("toggled");
@@ -91,6 +91,9 @@ if ($_SESSION['hakakses']!=="admin") {
 		</div>
 		<div id="page-content-wrapper">
 			<button href="#menu-toggle" class="btn btn-success btn-sm" id="menu-toggle" data-toggle="tooltip" data-placement="Right" title=""><i class="fa fa-bars"></i></button>
+			<button class="btn btn-sm btn-warning float-right ml-2" type="button" onclick="swal('<?php echo date("d M Y") ?>');">
+				<i class="fa fa-clock-o"></i>&nbsp;&nbsp;<?php echo date("d/m/Y"); ?>
+			</button>
 			<?php
 			if ($_SESSION['id']) {
 			?>
@@ -139,18 +142,16 @@ if ($_SESSION['hakakses']!=="admin") {
 		$("#wrapper").toggleClass("toggled");
 		$(document).ready(function(){
 			$('[data-toggle="tooltip"]').tooltip();
+			$('#tabsup').DataTable();
+			$('#tabbrg').DataTable();
+			$('#tabsat').DataTable();
+			$('#tabjen').DataTable();
+			$('#admintab').DataTable();
 		});
 		$("#menu-toggle").click(function(e) {
 			e.preventDefault();
 			$("#wrapper").toggleClass("toggled");
 		});
-		$(document).ready(function() {
-			 $('#tabsup').DataTable();
-			 $('#tabbrg').DataTable();
-			 $('#tabsat').DataTable();
-			 $('#tabjen').DataTable();
-			 $('#admintab').DataTable();
-		} );
     </script>
 </body>
 </html>

@@ -7,14 +7,10 @@ include 'config/db.php';
 	<title>Puskesmas Mlati I</title>
 	<link rel="icon" href="assets/images/puskesmas.png">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/simple-sidebar.css">
 	<link rel="stylesheet" href="assets/awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/sweetalert/dist/sweetalert2.css">
 	<script src="assets/sweetalert/dist/sweetalert2.js"></script>
-	<!--<link rel="stylesheet" href="assets/datatable/bootstrap.min.css">-->
-	<link rel="stylesheet" href="assets/datatable/dataTables.bootstrap4.min.css">
-	<link rel="stylesheet" href="assets/datatable/responsive.bootstrap4.min.css">
 	<script type="text/javascript">
 		function admin() {
 			swal(
@@ -72,7 +68,7 @@ include 'config/db.php';
 							'</script>';
 							echo "<meta http-equiv='refresh' content='2;url= page/user'>";
 						}else{
-							header("location:index.php?page=login");
+							header("location:./");
 						}
 					}
 					?>
@@ -83,14 +79,5 @@ include 'config/db.php';
 	<script src="assets/js/popper.min.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/datatable/jquery.dataTables.min.js"></script>
-	<script src="assets/datatable/dataTables.bootstrap4.min.js"></script>
-	<script src="assets/datatable/dataTables.responsive.min.js"></script>
-	<script src="assets/datatable/responsive.bootstrap4.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			$('[data-toggle="tooltip"]').tooltip();
-		});
-    </script>
 </body>
 </html>

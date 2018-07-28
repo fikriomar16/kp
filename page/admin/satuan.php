@@ -85,10 +85,10 @@ if (!$query) {
 					<td><?php echo $value[0] ?></td>
 					<td><?php echo $value[1] ?></td>
 					<td>
-						<button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Satuan" onclick="showmodaledt('<?php echo $value[0]; ?>','<?php echo $value[1]; ?>');">
+						<button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Satuan" onclick="showmodaledt('<?php echo $value[0]; ?>','<?php echo $value[1]; ?>');">
 							<i class="fa fa-edit"></i>
 						</button>
-						<button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Satuan" onclick="showmodaldel('<?php echo $value[0]; ?>','<?php echo $value[1]; ?>');">
+						<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Satuan" onclick="showmodaldel('<?php echo $value[0]; ?>','<?php echo $value[1]; ?>');">
 							<i class="fa fa-trash"></i>
 						</button>
 					</td>
@@ -116,12 +116,12 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="kodesatuan" id="kodesatuan" class="form-control text-center" placeholder="Kode Satuan" required>
+								<input type="text" name="kodesatuan" id="kodesatuan" class="form-control text-center" placeholder="Kode Satuan" maxlength="10" required>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="namasatuan" id="namasatuan" class="form-control text-center" placeholder="Nama Satuan" required>
+								<input type="text" name="namasatuan" id="namasatuan" class="form-control text-center" placeholder="Nama Satuan" maxlength="10" required>
 							</div>
 						</div>
 					</div>
@@ -152,13 +152,13 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="edtkodesatuan2" id="edtkodesatuan2" class="form-control text-center" placeholder="Kode Satuan" disabled>
+								<input type="text" name="edtkodesatuan2" id="edtkodesatuan2" class="form-control text-center text-primary" placeholder="Kode Satuan" disabled>
 								<input type="hidden" name="edtkodesatuan" id="edtkodesatuan" class="form-control text-center" placeholder="Kode Satuan">
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="edtnamasatuan" id="edtnamasatuan" class="form-control text-center" placeholder="Nama Satuan" required>
+								<input type="text" name="edtnamasatuan" id="edtnamasatuan" class="form-control text-center" placeholder="Nama Satuan" maxlength="10" required>
 							</div>
 						</div>
 					</div>
@@ -190,7 +190,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="delkodesatuan2" id="delkodesatuan2" class="form-control text-center" disabled>
+								<input type="text" name="delkodesatuan2" id="delkodesatuan2" class="form-control text-center text-danger" disabled>
 								<input type="hidden" name="delkodesatuan" id="delkodesatuan" class="form-control text-center">
 							</div>
 						</div>

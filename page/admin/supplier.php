@@ -115,13 +115,13 @@ if (!$query) {
 					<td><?php echo $value[4] ?></td>
 					<!--<td><?php echo $value[5] ?></td>-->
 					<td>
-						<button type="button" class="btn btn-outline-primary btn-sm" onclick="showmodaldet('<?php echo $value[0]; ?>','<?php echo $value[1]; ?>','<?php echo $value[2]; ?>',<?php echo $value[3]; ?>,'<?php echo $value[4]; ?>','<?php echo $value[5]; ?>');" data-toggle="tooltip" data-placement="top" title="Detail Supplier">
+						<button type="button" class="btn btn-primary btn-sm" onclick="showmodaldet('<?php echo $value[0]; ?>','<?php echo $value[1]; ?>','<?php echo $value[2]; ?>',<?php echo $value[3]; ?>,'<?php echo $value[4]; ?>','<?php echo $value[5]; ?>');" data-toggle="tooltip" data-placement="top" title="Detail Supplier">
 							<i class="fa fa-eye"></i>
 						</button>
-						<button type="button" class="btn btn-outline-secondary btn-sm" onclick="showmodaledt('<?php echo $value[0]; ?>','<?php echo $value[1]; ?>','<?php echo $value[2]; ?>',<?php echo $value[3]; ?>,'<?php echo $value[4]; ?>','<?php echo $value[5]; ?>');" data-toggle="tooltip" data-placement="top" title="Edit Data Supplier">
+						<button type="button" class="btn btn-secondary btn-sm" onclick="showmodaledt('<?php echo $value[0]; ?>','<?php echo $value[1]; ?>','<?php echo $value[2]; ?>',<?php echo $value[3]; ?>,'<?php echo $value[4]; ?>','<?php echo $value[5]; ?>');" data-toggle="tooltip" data-placement="top" title="Edit Data Supplier">
 							<i class="fa fa-edit"></i>
 						</button>
-						<button type="button" class="btn btn-outline-danger btn-sm" onclick="showmodaldel('<?php echo $value[0]; ?>','<?php echo $value[1]; ?>');" data-toggle="tooltip" data-placement="top" title="Hapus Data Supplier">
+						<button type="button" class="btn btn-danger btn-sm" onclick="showmodaldel('<?php echo $value[0]; ?>','<?php echo $value[1]; ?>');" data-toggle="tooltip" data-placement="top" title="Hapus Data Supplier">
 							<i class="fa fa-trash"></i>
 						</button>
 					</td>
@@ -150,7 +150,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="kodesup" class="form-control text-center" id="kodesup" placeholder="Kode Supplier" required>
+								<input type="text" name="kodesup" class="form-control text-center text-success" id="kodesup" placeholder="Kode Supplier" maxlength="10" required>
 							</div>
 						</div>
 						<div class="col">
@@ -204,7 +204,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="edtkodesup2" class="form-control text-center" id="edtkodesup2" placeholder="Kode Supplier" required="" disabled="true">
+								<input type="text" name="edtkodesup2" class="form-control text-center text-primary" id="edtkodesup2" placeholder="Kode Supplier" required="" disabled="true">
 								<input type="hidden" name="edtkodesup" class="form-control text-center" id="edtkodesup" placeholder="Kode Supplier" required="">
 							</div>
 						</div>
@@ -330,7 +330,7 @@ if (!$query) {
 						<div class="col">
 							<div class="form-group">
 								<input type="hidden" name="delkodesup" class="form-control text-center" id="delkodesup">
-								<input type="text" name="delkodesup2" class="form-control text-center" id="delkodesup2" disabled>
+								<input type="text" name="delkodesup2" class="form-control text-center text-danger" id="delkodesup2" disabled>
 							</div>
 						</div>
 						<div class="col">

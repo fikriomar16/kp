@@ -1,5 +1,6 @@
 <?php
-$sql = 'SELECT * FROM user;';
+$sesi = $_SESSION['id'];
+$sql = "SELECT * FROM user ORDER BY hakakses ASC;";
 $query = mysqli_query($con, $sql);
 if (!$query) {
     die ('SQL Error: ' . mysqli_error($con));
@@ -90,12 +91,14 @@ if (!$query) {
 					<td><?php echo $value[1] ?></td>
 					<td><?php echo $value[2] ?></td>
 					<td>
-						<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="tooltip" data-placement="top" title="Edit Data" onclick="showmodaledt('<?php echo $value[0] ?>','<?php echo $value[1] ?>');">
+						<button type="button" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Edit Data" onclick="showmodaledt('<?php echo $value[0] ?>','<?php echo $value[1] ?>');">
 							<i class="fa fa-edit"></i>
 						</button>
-						<button type="button" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Hapus Data" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>');">
+						<?php if ($value[0]!=$sesi) {?>
+						<button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus Data" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>');">
 							<i class="fa fa-trash"></i>
 						</button>
+						<?php }?>
 					</td>
 				</tr>
 				<?php
@@ -166,7 +169,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="edtusername2" id="edtusername2" class="form-control text-center" placeholder="Username" required>
+								<input type="text" name="edtusername2" id="edtusername2" class="form-control text-center text-primary" placeholder="Username" required>
 								<input type="hidden" name="edtusername" id="edtusername" class="form-control text-center" placeholder="Username">
 							</div>
 						</div>
@@ -213,7 +216,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="delusername2" id="delusername2" class="form-control text-center" disabled>
+								<input type="text" name="delusername2" id="delusername2" class="form-control text-center text-danger" disabled>
 								<input type="hidden" name="delusername" id="delusername" class="form-control text-center">
 							</div>
 						</div>

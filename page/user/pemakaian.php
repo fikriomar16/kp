@@ -67,7 +67,7 @@ if (!$query) {
 					<td><?php echo $value[4] ?></td>
 					<td><?php echo $value[5] ?></td>
 					<td>
-						<button type="button" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>,'<?php echo $value[6] ?>');">
+						<button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Hapus Data" onclick="showmodaldel('<?php echo $value[0] ?>','<?php echo $value[1] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>,'<?php echo $value[6] ?>');">
 							<i class="fa fa-trash"></i>
 						</button>
 					</td>
@@ -92,7 +92,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="kodekeluar" id="kodekeluar" class="form-control text-center" placeholder="Kode Barang Keluar" required>
+								<input type="text" name="kodekeluar" id="kodekeluar" class="form-control text-center text-success" placeholder="Kode Barang Keluar" maxlength="10" required>
 							</div>
 						</div>
 						<div class="col">
