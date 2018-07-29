@@ -121,8 +121,6 @@ class data {
 			echo '<script>swal("Data Berhasil Diinputkan");</script>';
 			echo "<script>location='index.php?page=supplier';</script>";
 		}
-		
-		
 	}
 
 	function edt_sup($kodesup,$namasup,$alamat,$telp,$kontak,$ket){
@@ -242,7 +240,9 @@ class data {
         $foto_lama = $data_lama['foto'];
 		if (!empty($lokasi_foto)) {
             if (file_exists("../../assets/images/barang/$foto_lama")) {
-            	unlink("../../assets/images/barang/$foto_lama");
+            	if ($foto_lama != "default.png") {
+            		unlink("../../assets/images/barang/$foto_lama");
+            	}
             }
             move_uploaded_file($lokasi_foto, "../../assets/images/barang/$nama_foto");
             $this->koneksi->query("UPDATE barang SET namabrg='$namabrg',kodejen='$kodejen',jumlah='$jumlah',harga='$harga',kodesatuan='$kodesatuan',tglmsk='$tglmsk',kodesup='$kodesup',foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
@@ -257,7 +257,9 @@ class data {
 		$data_lama = $this->select_brg($kodebrg);
 		$foto_lama = $data_lama['foto'];
 		if (file_exists("../../assets/images/barang/$foto_lama")) {
-			unlink("../../assets/images/barang/$foto_lama");
+			if ($foto_lama != "default.png") {
+				unlink("../../assets/images/barang/$foto_lama");
+			}
 			$this->koneksi->query("DELETE FROM barang WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
 		} else {
 			$this->koneksi->query("DELETE FROM barang WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
@@ -282,7 +284,9 @@ class data {
 			$this->koneksi->query("UPDATE barang SET jumlah=jumlah-'$jumlah' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
 			if (!empty($lokasi_foto)) {
 				if (file_exists("../../assets/images/barang/$foto_lama")) {
-					unlink("../../assets/images/barang/$foto_lama");
+					if ($foto_lama != "default.png") {
+						unlink("../../assets/images/barang/$foto_lama");
+					}
 				}
 				move_uploaded_file($lokasi_foto, "../../assets/images/barang/$nama_foto");
 				$this->koneksi->query("UPDATE barang SET foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
