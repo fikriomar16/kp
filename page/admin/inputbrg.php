@@ -38,6 +38,13 @@ if (!$query) {
 		var TextInsideP = document.getElementById("detfoto").innerHTML;
 		document.getElementById("image-id").src = "../../assets/images/barang/"+TextInsideP;
 	}
+	function gambar(nama,gambar){
+		swal({
+			title : nama,
+			html : '<img style="width: auto;height: 170px;" src="../../assets/images/barang/'+gambar+'">',
+			showConfirmButton: false
+		});
+	}
 	function getkode(e) {
 		document.getElementById('labelfoto').value = e.target.value;
 	}
@@ -95,8 +102,11 @@ if (!$query) {
 					<td><?php echo number_format($value[4], 0, ',', '.'); ?></td>
 					<td><?php echo $value[5] ?></td>
 					<td>
+						<button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Lihat Gambar" onclick="gambar('<?php echo $value[1] ?>','<?php echo $value[8] ?>');">
+							<i class="fa fa-image"></i>
+						</button>
 						<button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail Barang" onclick="showmodaldet('<?php echo $value[0] ?>','<?php echo $value[1] ?>','<?php echo $value[2] ?>',<?php echo $value[3] ?>,<?php echo $value[4] ?>,'<?php echo $value[5] ?>','<?php echo $value[6] ?>','<?php echo $value[7] ?>','<?php echo $value[8] ?>');">
-							<i class="fa fa-list"></i>
+							<i class="fa fa-eye"></i>
 						</button>
 						<button type="button" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit Data Barang" onclick="showmodaledt('<?php echo $value[0] ?>','<?php echo $value[1] ?>',<?php echo $value[3] ?>,<?php echo $value[4] ?>);">
 							<i class="fa fa-edit"></i>

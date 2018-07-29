@@ -19,6 +19,18 @@ include 'config/db.php';
 				'success'
 				)
 		}
+		function masuk(){
+			const toast = swal.mixin({
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 3000
+			});
+			toast({
+				type: 'success',
+				title: 'Selamat Datang'
+			})
+		}
 		function user() {
 			swal(
 				'Sukses Login!',
@@ -60,6 +72,7 @@ include 'config/db.php';
 							'admin()',
 							'</script>';
 							echo "<meta http-equiv='refresh' content='2;url= page/admin'>";
+							//echo "<script>masuk()</script>";
 						}
 						else if ($hasil=="user") {
 							#header("location:index.php");

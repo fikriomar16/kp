@@ -27,6 +27,18 @@ if ($_SESSION['hakakses']!=="admin") {
 		$(document).ready(function(){
 			$("#wrapper").toggleClass("toggled");
 		});
+		function masuk(){
+			const toast = swal.mixin({
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 3000
+			});
+			toast({
+				type: 'success',
+				title: 'Selamat Datang'
+			})
+		}
 	</script>
 </head>
 <body style="background-color: #e7e8eb;">

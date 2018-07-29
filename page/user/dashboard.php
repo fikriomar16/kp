@@ -1,3 +1,6 @@
+<?php
+echo '<script>masuk()</script>';
+?>
 <center>
 	<img src="../../assets/images/puskesmasbanner1.png" style="width: auto;height: 300px;" class="rounded img-fluid">
 </center>
