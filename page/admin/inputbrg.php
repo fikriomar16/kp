@@ -38,27 +38,6 @@ if (!$query) {
 		var TextInsideP = document.getElementById("detfoto").innerHTML;
 		document.getElementById("image-id").src = "../../assets/images/barang/"+TextInsideP;
 	}
-	function sukses_add() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Ditambahkan',
-			'success'
-			)
-	}
-	function sukses_edt() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Diubah',
-			'success'
-			)
-	}
-	function sukses_del() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Dihapus',
-			'success'
-			)
-	}
 	function getkode(e) {
 		document.getElementById('labelfoto').value = e.target.value;
 	}
@@ -76,17 +55,15 @@ if (!$query) {
 	<?php
 	if (isset($_POST['add_brg'])) {
 		$data->add_brg($_POST['kodebrg'],$_POST['namabrg'],$_POST['jenis'],$_POST['jumlah'],$_POST['harga'],$_POST['satuan'],$_POST['tglmsk'],$_POST['sup'],$_FILES['foto']);
-		echo '<script>sukses_add()</script>';
-		echo "<script>location='index.php?page=inputbrg';</script>";
 	}
 	if (isset($_POST['edt_brg'])) {
 		$data->edt_brg($_POST['edtkodebrg'],$_POST['edtnamabrg'],$_POST['edtjenis'],$_POST['edtjumlah'],$_POST['edtharga'],$_POST['edtsatuan'],$_POST['edttglmsk'],$_POST['edtsup'],$_FILES['edtfoto']);
-		echo '<script>sukses_edt()</script>';
+		echo '<script>swal("Data Berhasil Diubah");</script>';
 		echo "<script>location='index.php?page=inputbrg';</script>";
 	}
 	if (isset($_POST['del_brg'])) {
 		$data->del_brg($_POST['delkodebrg']);
-		echo '<script>sukses_del()</script>';
+		echo '<script>swal("Data Berhasil Dihapus");</script>';
 		echo "<script>location='index.php?page=inputbrg';</script>";
 	}
 	?>

@@ -45,8 +45,6 @@ if (!$query) {
 	<?php
 	if (isset($_POST['add_brgin'])) {
 		$data->add_brgin($_POST['kodemasuk'],$_POST['tglmasuk'],$_POST['kodebrg'],$_POST['jumlah'],$_FILES['foto']);
-		echo '<script>swal("Berhasil Menginputkan Data")</script>';
-		echo "<script>location='index.php?page=penerimaan';</script>";
 	}
 	if (isset($_POST['del_brgin'])) {
 		$data->del_brgin($_POST['delkodemasuk'],$_POST['getkodebrg'],$_POST['deljumlah']);

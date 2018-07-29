@@ -100,9 +100,29 @@ class data {
 		$this->koneksi = $con;
 	}
 
+	function select_sup($kodesup){
+		$select = $this->koneksi->query("SELECT * FROM supplier WHERE kodesup='$kodesup'");
+		$fetch = $select->fetch_assoc();
+        return $fetch;
+	}
+
 	function add_sup($kodesup,$namasup,$alamat,$telp,$kontak,$ket)
 	{
-		$this->koneksi->query("INSERT INTO supplier(kodesup,namasup,alamat,telp,kontak,ket) VALUES ('$kodesup','$namasup','$alamat','$telp','$kontak','$ket')") or die(mysqli_error($this->koneksi));
+		$cek = $this->koneksi->query("SELECT * FROM supplier WHERE kodesup='$kodesup'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sudah Ada',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+				});</script>";
+		} else {
+			$this->koneksi->query("INSERT INTO supplier(kodesup,namasup,alamat,telp,kontak,ket) VALUES ('$kodesup','$namasup','$alamat','$telp','$kontak','$ket')") or die(mysqli_error($this->koneksi));
+			echo '<script>swal("Data Berhasil Diinputkan");</script>';
+			echo "<script>location='index.php?page=supplier';</script>";
+		}
+		
+		
 	}
 
 	function edt_sup($kodesup,$namasup,$alamat,$telp,$kontak,$ket){
@@ -186,16 +206,28 @@ class data {
 	}
 
 	function add_brg($kodebrg,$namabrg,$kodejen,$jumlah,$harga,$kodesatuan,$tglmsk,$kodesup,$foto){
-		$nama_foto=$foto['name'];
-		$lokasi_foto=$foto['tmp_name'];
-		if (empty($nama_foto)) {
-			$nama_foto="default.png";
+		$cek = $this->koneksi->query("SELECT * FROM barang WHERE kodebrg='$kodebrg'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sudah Ada',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+				});</script>";
+		} else {
+			$nama_foto=$foto['name'];
+			$lokasi_foto=$foto['tmp_name'];
+			if (empty($nama_foto)) {
+				$nama_foto="default.png";
+			}
+			if (!empty($lokasi_foto)) {
+				move_uploaded_file($lokasi_foto, "../../assets/images/barang/$nama_foto");
+			}
+			//echo $kodebrg." - ".$namabrg." - ".$nama_foto." - ".$foto;
+			$this->koneksi->query("INSERT INTO barang(kodebrg,namabrg,kodejen,jumlah,harga,kodesatuan,tglmsk,kodesup,foto) VALUES ('$kodebrg','$namabrg','$kodejen','$jumlah','$harga','$kodesatuan','$tglmsk','$kodesup','$nama_foto')") or die(mysqli_error($this->koneksi));
+			echo '<script>swal("Data Berhasil Diinputkan");</script>';
+			echo "<script>location='index.php?page=inputbrg';</script>";
 		}
-		if (!empty($lokasi_foto)) {
-			move_uploaded_file($lokasi_foto, "../../assets/images/barang/$nama_foto");
-		}
-		//echo $kodebrg." - ".$namabrg." - ".$nama_foto." - ".$foto;
-		$this->koneksi->query("INSERT INTO barang(kodebrg,namabrg,kodejen,jumlah,harga,kodesatuan,tglmsk,kodesup,foto) VALUES ('$kodebrg','$namabrg','$kodejen','$jumlah','$harga','$kodesatuan','$tglmsk','$kodesup','$nama_foto')") or die(mysqli_error($this->koneksi));
 	}
 	function select_brg($kodebrg){
 		$select = $this->koneksi->query("SELECT * FROM barang WHERE kodebrg='$kodebrg'");
@@ -232,25 +264,37 @@ class data {
 		}
 	}
 	function add_brgin($kodemasuk,$tglmasuk,$kodebrg,$jumlah,$foto){
-		error_reporting(0); 
-        $nama_foto=$foto['name'];
-        $lokasi_foto=$foto['tmp_name'];
-        $data_lama = $this->select_brg($kodebrg);
-        $foto_lama = $data_lama['foto'];
-		$this->koneksi->query("INSERT INTO brgmasuk(kodemasuk,tglmasuk,kodebrg,jumlah) VALUES ('$kodemasuk','$tglmasuk','$kodebrg','$jumlah')") or die(mysqli_error($this->koneksi));
-		$this->koneksi->query("UPDATE barang SET jumlah=jumlah-'$jumlah' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
-		if (!empty($lokasi_foto)) {
-			if (file_exists("../../assets/images/barang/$foto_lama")) {
-            	unlink("../../assets/images/barang/$foto_lama");
-            }
-            move_uploaded_file($lokasi_foto, "../../assets/images/barang/$nama_foto");
-            $this->koneksi->query("UPDATE barang SET foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+		$cek = $this->koneksi->query("SELECT*FROM brgmasuk WHERE kodemasuk='$kodemasuk'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sudah Ada',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+				});</script>";
 		} else {
-			if (empty($nama_foto)) {
-            	$nama_foto=$foto_lama;
-            }
-            $this->koneksi->query("UPDATE barang SET foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
-		}		
+			error_reporting(0); 
+			$nama_foto=$foto['name'];
+			$lokasi_foto=$foto['tmp_name'];
+			$data_lama = $this->select_brg($kodebrg);
+			$foto_lama = $data_lama['foto'];
+			$this->koneksi->query("INSERT INTO brgmasuk(kodemasuk,tglmasuk,kodebrg,jumlah) VALUES ('$kodemasuk','$tglmasuk','$kodebrg','$jumlah')") or die(mysqli_error($this->koneksi));
+			$this->koneksi->query("UPDATE barang SET jumlah=jumlah-'$jumlah' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+			if (!empty($lokasi_foto)) {
+				if (file_exists("../../assets/images/barang/$foto_lama")) {
+					unlink("../../assets/images/barang/$foto_lama");
+				}
+				move_uploaded_file($lokasi_foto, "../../assets/images/barang/$nama_foto");
+				$this->koneksi->query("UPDATE barang SET foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+			} else {
+				if (empty($nama_foto)) {
+					$nama_foto=$foto_lama;
+				}
+				$this->koneksi->query("UPDATE barang SET foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+			}
+			echo '<script>swal("Berhasil Menginputkan Data")</script>';
+			echo "<script>location='index.php?page=penerimaan';</script>";
+		}			
 	}
 
 	function del_brgin($kodemasuk,$kodebrg,$jumlah){
@@ -259,8 +303,20 @@ class data {
 	}
 
 	function add_brgout($kodekeluar,$kodemasuk,$tglkeluar,$jumlah,$ket){
-		$this->koneksi->query("INSERT INTO brgkeluar(kodekeluar,kodemasuk,tglkeluar,jumlah,ket) VALUES ('$kodekeluar','$kodemasuk','$tglkeluar','$jumlah','$ket')") or die(mysqli_error($this->koneksi));
-		$this->koneksi->query("UPDATE brgmasuk SET jumlah=jumlah-'$jumlah' WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
+		$cek = $this->koneksi->query("SELECT*FROM brgkeluar WHERE kodekeluar='$kodekeluar'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sudah Ada',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+				});</script>";
+		} else {
+			$this->koneksi->query("INSERT INTO brgkeluar(kodekeluar,kodemasuk,tglkeluar,jumlah,ket) VALUES ('$kodekeluar','$kodemasuk','$tglkeluar','$jumlah','$ket')") or die(mysqli_error($this->koneksi));
+			$this->koneksi->query("UPDATE brgmasuk SET jumlah=jumlah-'$jumlah' WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
+			echo '<script>swal("Berhasil Menginputkan Data")</script>';
+			echo "<script>location='index.php?page=pemakaian';</script>";
+		}
 	}
 
 	function del_brgout($kodekeluar,$kodemasuk,$jumlah){
@@ -270,7 +326,19 @@ class data {
 
 	function add_sat($kodesatuan,$namasatuan)
 	{
-		$this->koneksi->query("INSERT INTO satuan(kodesatuan,namasatuan) VALUES ('$kodesatuan','$namasatuan')") or die(mysqli_error($this->koneksi));
+		$cek = $this->koneksi->query("SELECT*FROM satuan WHERE kodesatuan='$kodesatuan'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sudah Ada',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+				});</script>";
+		} else {
+			$this->koneksi->query("INSERT INTO satuan(kodesatuan,namasatuan) VALUES ('$kodesatuan','$namasatuan')") or die(mysqli_error($this->koneksi));
+			echo '<script>swal("Data Berhasil Diinputkan");</script>';
+			echo "<script>location='index.php?page=satuan';</script>";
+		}
 	}
 
 	function edt_sat($kodesatuan,$namasatuan)
@@ -285,7 +353,19 @@ class data {
 
 	function add_jen($kodejen,$namajen)
 	{
-		$this->koneksi->query("INSERT INTO jenisbarang(kodejen,namajen) VALUES ('$kodejen','$namajen')") or die(mysqli_error($this->koneksi));
+		$cek = $this->koneksi->query("SELECT*FROM jenisbarang WHERE kodejen='$kodejen'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sudah Ada',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+				});</script>";
+		} else {
+			$this->koneksi->query("INSERT INTO jenisbarang(kodejen,namajen) VALUES ('$kodejen','$namajen')") or die(mysqli_error($this->koneksi));
+			echo '<script>swal("Data Berhasil Diinputkan");</script>';
+			echo "<script>location='index.php?page=jenis';</script>";
+		}
 	}
 
 	function edt_jen($kodejen,$namajen)
@@ -299,7 +379,19 @@ class data {
 	}
 
 	function add_user($username,$pass,$hakakses){
-		$this->koneksi->query("INSERT INTO user(username,pass,hakakses) VALUES ('$username',PASSWORD('$pass'),'$hakakses')") or die(mysqli_error($this->koneksi));
+		$cek = $this->koneksi->query("SELECT*FROM user WHERE username='$username'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sudah Ada',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+				});</script>";
+		} else {
+			$this->koneksi->query("INSERT INTO user(username,pass,hakakses) VALUES ('$username',PASSWORD('$pass'),'$hakakses')") or die(mysqli_error($this->koneksi));
+			echo '<script>swal("Input Data Berhasil")</script>';
+			echo "<script>location='index.php?page=admin';</script>";
+		}
 	}
 
 	function edt_user($newuser,$username,$pass,$hakakses){

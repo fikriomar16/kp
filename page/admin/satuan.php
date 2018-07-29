@@ -22,27 +22,6 @@ if (!$query) {
 		$('#delnamasatuan2').val(namasatuan);
 		$('#modaldel').modal('show');
 	}
-	function sukses_add() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Ditambahkan',
-			'success'
-			)
-	}
-	function sukses_edt() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Diubah',
-			'success'
-			)
-	}
-	function sukses_del() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Dihapus',
-			'success'
-			)
-	}
 </script>
 <center>
 	<h4>Form Satuan Barang</h4>
@@ -54,14 +33,15 @@ if (!$query) {
 	<?php
 	if (isset($_POST['add_sat'])) {
 		$data->add_sat($_POST['kodesatuan'],$_POST['namasatuan']);
-		echo "<script>location='index.php?page=satuan';</script>";
 	}
 	if (isset($_POST['edt_sat'])) {
 		$data->edt_sat($_POST['edtkodesatuan'],$_POST['edtnamasatuan']);
+		echo '<script>swal("Data Berhasil Diubah");</script>';
 		echo "<script>location='index.php?page=satuan';</script>";
 	}
 	if (isset($_POST['del_sat'])) {
 		$data->del_sat($_POST['delkodesatuan']);
+		echo '<script>swal("Data Berhasil Dihapus");</script>';
 		echo "<script>location='index.php?page=satuan';</script>";
 	}
 	?>
@@ -116,7 +96,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="kodesatuan" id="kodesatuan" class="form-control text-center" placeholder="Kode Satuan" maxlength="10" required>
+								<input type="text" name="kodesatuan" id="kodesatuan" class="form-control text-center text-success" placeholder="Kode Satuan" maxlength="10" required>
 							</div>
 						</div>
 						<div class="col">

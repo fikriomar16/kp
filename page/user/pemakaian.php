@@ -30,8 +30,6 @@ if (!$query) {
 	<?php
 	if (isset($_POST['add_brgout'])) {
 		$data->add_brgout($_POST['kodekeluar'],$_POST['datamasuk'],$_POST['tglkeluar'],$_POST['jumlah'],$_POST['ket']);
-		echo '<script>swal("Berhasil Menginputkan Data")</script>';
-		echo "<script>location='index.php?page=pemakaian';</script>";
 	}
 	if (isset($_POST['del_brgout'])) {
 		$data->del_brgout($_POST['delkodekeluar'],$_POST['kodemasuk'],$_POST['deljumlah']);

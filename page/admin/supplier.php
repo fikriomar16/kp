@@ -41,27 +41,6 @@ if (!$query) {
 		$('#delnamasup2').val(namasup);
 		$('#modaldel').modal('show');
 	}
-	function sukses_add() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Ditambahkan',
-			'success'
-			)
-	}
-	function sukses_edt() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Diubah',
-			'success'
-			)
-	}
-	function sukses_del() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Dihapus',
-			'success'
-			)
-	}
 </script>
 <center>
 	<h4>Daftar Supplier</h4>
@@ -73,17 +52,15 @@ if (!$query) {
 	<?php
 	if (isset($_POST['add_sup'])) {
 		$data->add_sup($_POST['kodesup'],$_POST['namasup'],$_POST['alamat'],$_POST['telp'],$_POST['kontak'],$_POST['ket']);
-		echo '<script>sukses_add()</script>';
-		echo "<script>location='index.php?page=supplier';</script>";
 	}
 	if (isset($_POST['edt_sup'])) {
 		$data->edt_sup($_POST['edtkodesup'],$_POST['edtnamasup'],$_POST['edtalamat'],$_POST['edttelp'],$_POST['edtkontak'],$_POST['edtket']);
-		echo '<script>sukses_edt()</script>';
+		echo '<script>swal("Data Berhasil Diubah");</script>';
 		echo "<script>location='index.php?page=supplier';</script>";
 	}
 	if (isset($_POST['del_sup'])) {
 		$data->del_sup($_POST['delkodesup']);
-		echo '<script>sukses_del();</script>';
+		echo '<script>swal("Data Berhasil Dihapus");</script>';
 		echo "<script>location='index.php?page=supplier';</script>";
 	}
 	?>
@@ -175,7 +152,7 @@ if (!$query) {
 						</div>
 					</div>
 					<div class="form-group">
-						<input type="text" name="ket" class="form-control text-center" id="ket" placeholder="Keterangan" required>
+						<input type="text" name="ket" class="form-control text-center" id="ket" placeholder="Keterangan">
 					</div>
 					<div class="modal-footer form-group">
 						<button class="btn btn-sm btn-success" type="submit" name="add_sup" id="add_sup">
@@ -230,7 +207,7 @@ if (!$query) {
 						</div>
 					</div>
 					<div class="form-group">
-						<input type="text" name="edtket" class="form-control text-center" id="edtket" placeholder="Keterangan" required>
+						<input type="text" name="edtket" class="form-control text-center" id="edtket" placeholder="Keterangan">
 					</div>
 					<div class="modal-footer form-group">
 						<button class="btn btn-sm btn-primary" type="submit" name="edt_sup" id="edt_sup">

@@ -22,27 +22,6 @@ if (!$query) {
 		$('#delnamajen2').val(namajen);
 		$('#modaldel').modal('show');
 	}
-	function sukses_add() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Ditambahkan',
-			'success'
-			)
-	}
-	function sukses_edt() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Diubah',
-			'success'
-			)
-	}
-	function sukses_del() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Dihapus',
-			'success'
-			)
-	}
 </script>
 <center>
 	<h4>Form Jenis Barang</h4>
@@ -54,14 +33,15 @@ if (!$query) {
 	<?php
 	if (isset($_POST['add_jen'])) {
 		$data->add_jen($_POST['kodejen'],$_POST['namajen']);
-		echo "<script>location='index.php?page=jenis';</script>";
 	}
 	if (isset($_POST['edt_jen'])) {
 		$data->edt_jen($_POST['edtkodejen'],$_POST['edtnamajen']);
+		echo '<script>swal("Data Berhasil Diubah");</script>';
 		echo "<script>location='index.php?page=jenis';</script>";
 	}
 	if (isset($_POST['del_jen'])) {
 		$data->del_jen($_POST['delkodejen']);
+		echo '<script>swal("Data Berhasil Dihapus");</script>';
 		echo "<script>location='index.php?page=jenis';</script>";
 	}
 	?>
@@ -116,7 +96,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="kodejen" id="kodejen" class="form-control text-center" placeholder="Kode Jenis" maxlength="10" required>
+								<input type="text" name="kodejen" id="kodejen" class="form-control text-center text-success" placeholder="Kode Jenis" maxlength="10" required>
 							</div>
 						</div>
 						<div class="col">

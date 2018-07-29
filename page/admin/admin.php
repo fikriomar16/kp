@@ -7,27 +7,6 @@ if (!$query) {
 }
 ?>
 <script type="text/javascript">
-	function sukses_add() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Ditambahkan',
-			'success'
-			)
-	}
-	function sukses_edt() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Diubah',
-			'success'
-			)
-	}
-	function sukses_del() {
-		swal(
-			'Berhasil',
-			'Data Berhasil Dihapus',
-			'success'
-			)
-	}
 	function showmodaladmin() {
 		$('#modaluser').modal('show');
 	}
@@ -55,8 +34,6 @@ if (!$query) {
 	<?php
 	if (isset($_POST['add_user'])) {
 		$data->add_user($_POST['username'],$_POST['pass'],$_POST['hakakses']);
-		echo '<script>swal("Input Data Berhasil")</script>';
-		echo "<script>location='index.php?page=admin';</script>";
 	}
 	if (isset($_POST['edt_user'])) {
 		$data->edt_user($_POST['edtusername2'],$_POST['edtusername'],$_POST['edtpass'],$_POST['edthakakses']);
