@@ -12,12 +12,21 @@ include 'config/db.php';
 	<link rel="stylesheet" href="assets/sweetalert/dist/sweetalert2.css">
 	<script src="assets/sweetalert/dist/sweetalert2.js"></script>
 	<script type="text/javascript">
+		function error() {
+			swal({
+				title : 'Gagal Login',
+				text : 'Username / Password Salah',
+				type : 'error',
+				showConfirmButton: false
+			})
+		}
 		function admin() {
-			swal(
-				'Sukses Login!',
-				'Masuk Sebagai Admin!',
-				'success'
-				)
+			swal({
+				title : 'Sukses Login',
+				text : 'Masuk Sebagai Admin',
+				type : 'success',
+				showConfirmButton: false
+			})
 		}
 		function masuk(){
 			const toast = swal.mixin({
@@ -32,15 +41,24 @@ include 'config/db.php';
 			})
 		}
 		function user() {
-			swal(
-				'Sukses Login!',
-				'Masuk Sebagai User!',
-				'success'
-				)
+			swal({
+				title : 'Sukses Login',
+				text : 'Masuk Sebagai User',
+				type : 'success',
+				showConfirmButton: false
+			})
 		}
 	</script>
+	<style type="text/css">
+		body{
+			background: url(assets/images/bgblur.jpg);
+			background-repeat: no-repeat;
+			background-size: 100vw;
+			background-attachment:fixed;
+		}
+	</style>
 </head>
-<body style="background-color: #e7e8eb;">
+<body>
 	<center>
 		<img src="assets/images/puskesmasbanner1.png" style="width: auto;height: 250px;margin-top: 50px;margin-bottom: -100px" class="rounded img-fluid">
 		<div class="card box" style="width: 400px;height: 280px;margin-top: 70px">
@@ -81,7 +99,8 @@ include 'config/db.php';
 							'</script>';
 							echo "<meta http-equiv='refresh' content='2;url= page/user'>";
 						}else{
-							header("location:./");
+							echo '<script>error()</script>';
+							//header("location:./");
 						}
 					}
 					?>

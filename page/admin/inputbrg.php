@@ -82,7 +82,7 @@ if (!$query) {
 					<th>Kode</th>
 					<th>Nama</th>
 					<th>Jenis</th>
-					<th>Jumlah</th>
+					<th>Jml</th>
 					<th>Harga</th>
 					<th>Satuan</th>
 					<th>Aksi</th>

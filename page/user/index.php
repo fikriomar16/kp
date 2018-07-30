@@ -21,6 +21,18 @@ if (!isset($_SESSION['id'])) {
 	<link rel="stylesheet" href="../../assets/datatable/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="../../assets/datatable/responsive.bootstrap4.min.css">
 	<script type="text/javascript">
+		function masuk(){
+			const toast = swal.mixin({
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 3000
+			});
+			toast({
+				type: 'success',
+				title: 'Selamat Datang'
+			})
+		}
 		$(document).ready(function(){
 			$("#wrapper").toggleClass("toggled");
 		});
@@ -90,7 +102,7 @@ if (!isset($_SESSION['id'])) {
 		<div id="page-content-wrapper">
 			<button href="#menu-toggle" class="btn btn-success btn-sm" id="menu-toggle" data-toggle="tooltip" data-placement="Right" title=""><i class="fa fa-bars"></i></button>
 			<button class="btn btn-sm btn-warning float-right ml-2" type="button" onclick="swal('<?php echo date("d M Y") ?>');">
-				<i class="fa fa-clock-o"></i>&nbsp;&nbsp;<?php echo date("d/m/Y"); ?>
+				<i class="fa fa-calendar-o"></i>&nbsp;&nbsp;<?php echo date("d/m/Y"); ?>
 			</button>
 			<?php
 			if ($_SESSION['id']) {

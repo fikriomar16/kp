@@ -24,9 +24,6 @@ if ($_SESSION['hakakses']!=="admin") {
 	<link rel="stylesheet" href="../../assets/datatable/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="../../assets/datatable/responsive.bootstrap4.min.css">
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#wrapper").toggleClass("toggled");
-		});
 		function masuk(){
 			const toast = swal.mixin({
 				toast: true,
@@ -39,6 +36,9 @@ if ($_SESSION['hakakses']!=="admin") {
 				title: 'Selamat Datang'
 			})
 		}
+		$(document).ready(function(){
+			$("#wrapper").toggleClass("toggled");
+		});
 	</script>
 </head>
 <body style="background-color: #e7e8eb;">
@@ -88,7 +88,7 @@ if ($_SESSION['hakakses']!=="admin") {
 				<li>
 					<form method="POST">
 						<center>
-							<button type="submit" class="btn btn-danger mt-4" name="logout" id="logout">
+							<button type="submit" class="btn btn-danger mt-4" name="logout" id="logout" onclick="swal('Berhasil Logout');">
 								<i class="fa fa-hand-o-left"></i>&nbsp;Logout
 							</button>
 							<?php
@@ -104,7 +104,7 @@ if ($_SESSION['hakakses']!=="admin") {
 		<div id="page-content-wrapper">
 			<button href="#menu-toggle" class="btn btn-success btn-sm" id="menu-toggle" data-toggle="tooltip" data-placement="Right" title=""><i class="fa fa-bars"></i></button>
 			<button class="btn btn-sm btn-warning float-right ml-2" type="button" onclick="swal('<?php echo date("d M Y") ?>');">
-				<i class="fa fa-clock-o"></i>&nbsp;&nbsp;<?php echo date("d/m/Y"); ?>
+				<i class="fa fa-calendar-o"></i>&nbsp;&nbsp;<?php echo date("d/m/Y"); ?>
 			</button>
 			<?php
 			if ($_SESSION['id']) {
