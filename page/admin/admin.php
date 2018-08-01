@@ -101,12 +101,12 @@ if (!$query) {
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-								<input type="text" name="username" id="username" class="form-control text-center" placeholder="Username" required>
+								<input type="text" name="username" id="username" class="form-control text-center" placeholder="Username" minlength="4" required>
 							</div>
 						</div>
 						<div class="col">
 							<div class="form-group">
-								<input type="password" name="pass" id="pass" class="form-control text-center" placeholder="Password" required>
+								<input type="password" name="pass" id="pass" class="form-control text-center" placeholder="Password" minlength="4" required>
 							</div>
 						</div>
 						<div class="col">
@@ -152,7 +152,7 @@ if (!$query) {
 						</div>
 						<div class="col">
 							<div class="form-group">
-								<input type="password" name="edtpass" id="edtpass" class="form-control text-center" placeholder="Password" required>
+								<input type="password" name="edtpass" id="edtpass" class="form-control text-center" placeholder="Password" minlength="4" required>
 							</div>
 						</div>
 						<div class="col">

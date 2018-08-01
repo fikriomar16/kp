@@ -1,5 +1,5 @@
 <?php
-$sql = 'SELECT * FROM supplier;';
+$sql = 'SELECT * FROM supplier WHERE kodesup!="-";';
 $query = mysqli_query($con, $sql);
 if (!$query) {
     die ('SQL Error: ' . mysqli_error($con));

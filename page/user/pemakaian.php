@@ -120,7 +120,17 @@ if (!$query) {
 						</div>
 					</div>
 					<div class="form-group">
-						<input type="text" name="ket" id="ket" class="form-control text-center" placeholder="Keterangan">
+						<!--<input type="text" name="ket" id="ket" class="form-control text-center" placeholder="Keterangan">-->
+						<select class="form-control text-center" name="ket" id="ket" required>
+							<option value="" disabled selected>Pilih Status</option>
+							<option value="Digunakan">Digunakan</option>
+							<option value="Dipinjam">Dipinjam</option>
+							<option value="Dibeli">Dibeli</option>
+							<option value="Dijual">Dijual</option>
+							<option value="Rusak">Rusak</option>
+							<option value="Dalam Perbaikan">Dalam Perbaikan</option>
+							<option value="Lain-lain">Lain-lain</option>
+						</select>
 					</div>
 					<div class="modal-footer form-group">
 						<button class="btn btn-sm btn-success" type="submit" name="add_brgout" id="add_brgout">

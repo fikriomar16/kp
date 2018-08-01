@@ -85,7 +85,6 @@ include 'config/db.php';
 					if (isset($_POST['signin'])) {
 						$hasil=$user->login($_POST['username'],$_POST['pass']);
 						if ($hasil=="admin") {
-							#header("location:index.php");
 							echo '<script type="text/javascript">',
 							'admin()',
 							'</script>';
@@ -93,7 +92,6 @@ include 'config/db.php';
 							//echo "<script>masuk()</script>";
 						}
 						else if ($hasil=="user") {
-							#header("location:index.php");
 							echo '<script type="text/javascript">',
 							'user()',
 							'</script>';

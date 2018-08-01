@@ -41,7 +41,7 @@ if (!$query) {
 	function gambar(nama,gambar){
 		swal({
 			title : nama,
-			html : '<img style="width: auto;height: 170px;" src="../../assets/images/barang/'+gambar+'">',
+			html : '<img style="width: auto;height: 270px;" src="../../assets/images/barang/'+gambar+'">',
 			showConfirmButton: false
 		});
 	}

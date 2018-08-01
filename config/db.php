@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+//setting koneksi
 $con = new mysqli("localhost","root","i1k2i3","puskesmas");
 
 class user {
@@ -13,9 +14,11 @@ class user {
 	function login($username, $pass){
 		$sql = "select username,hakakses from user where username='$username' and pass=PASSWORD('$pass') limit 1";
 		$select = $this->koneksi->query($sql);
+		//jika tidak terhubung ke database
 		if(!$select){
 			die('Kesalahan Database'.$this->koneksi->error);
 		}
+		//jika user ditemukan
 		if($select->num_rows == 1){
 			$row = $select->fetch_assoc();
 			$_SESSION['id'] = $row['username'];
@@ -118,8 +121,18 @@ class data {
 				});</script>";
 		} else {
 			$this->koneksi->query("INSERT INTO supplier(kodesup,namasup,alamat,telp,kontak,ket) VALUES ('$kodesup','$namasup','$alamat','$telp','$kontak','$ket')") or die(mysqli_error($this->koneksi));
-			echo '<script>swal("Data Berhasil Diinputkan");</script>';
-			echo "<script>location='index.php?page=supplier';</script>";
+			//echo '<script>swal("Data Berhasil Diinputkan");</script>';
+			//echo "<script>location='index.php?page=supplier';</script>";
+			echo "<script>setTimeout(function () { 
+				swal({
+					title: 'Data Berhasil Diinputkan',
+					type: 'success',
+					showConfirmButton: false,
+				});
+			},10);
+			window.setTimeout(function(){
+				window.location.replace('index.php?page=supplier');
+			} ,900); </script>";
 		}
 	}
 
@@ -148,7 +161,8 @@ class data {
 	}
 
 	function keluar($bulan){
-		$select = $this->koneksi->query("SELECT barang.kodebrg, brgkeluar.tglkeluar, barang.namabrg, brgkeluar.jumlah, satuan.namasatuan, barang.harga, (brgkeluar.jumlah*barang.harga) AS subtotal, brgmasuk.kodemasuk FROM brgkeluar INNER JOIN brgmasuk ON brgkeluar.kodemasuk = brgmasuk.kodemasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN satuan ON barang.kodesatuan = satuan.kodesatuan WHERE month(brgkeluar.tglkeluar)='$bulan' AND brgkeluar.ket LIKE '%digunakan%' ORDER BY brgmasuk.kodemasuk ASC");
+		//$select = $this->koneksi->query("SELECT barang.kodebrg, brgkeluar.tglkeluar, barang.namabrg, brgkeluar.jumlah, satuan.namasatuan, barang.harga, (brgkeluar.jumlah*barang.harga) AS subtotal, brgmasuk.kodemasuk FROM brgkeluar INNER JOIN brgmasuk ON brgkeluar.kodemasuk = brgmasuk.kodemasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN satuan ON barang.kodesatuan = satuan.kodesatuan WHERE month(brgkeluar.tglkeluar)='$bulan' AND brgkeluar.ket LIKE '%digunakan%' ORDER BY brgmasuk.kodemasuk ASC");
+		$select = $this->koneksi->query("SELECT barang.kodebrg, brgkeluar.tglkeluar, barang.namabrg, brgkeluar.jumlah, satuan.namasatuan, barang.harga, (brgkeluar.jumlah*barang.harga) AS subtotal, brgmasuk.kodemasuk FROM brgkeluar INNER JOIN brgmasuk ON brgkeluar.kodemasuk = brgmasuk.kodemasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN satuan ON barang.kodesatuan = satuan.kodesatuan WHERE month(brgkeluar.tglkeluar)='$bulan' AND brgkeluar.ket != 'Dipinjam' ORDER BY brgmasuk.kodemasuk ASC");
 		while ($fetch = $select->fetch_assoc()) {
 			$data[] = $fetch;
 		}
@@ -215,16 +229,28 @@ class data {
 		} else {
 			$nama_foto=$foto['name'];
 			$lokasi_foto=$foto['tmp_name'];
+			//jika foto yg dipilih kosong, maka akan memilih gambar default
 			if (empty($nama_foto)) {
 				$nama_foto="default.png";
 			}
+			//jika foto yang dipilih ada, maka akan memindah file
 			if (!empty($lokasi_foto)) {
 				move_uploaded_file($lokasi_foto, "../../assets/images/barang/$nama_foto");
 			}
 			//echo $kodebrg." - ".$namabrg." - ".$nama_foto." - ".$foto;
 			$this->koneksi->query("INSERT INTO barang(kodebrg,namabrg,kodejen,jumlah,harga,kodesatuan,tglmsk,kodesup,foto) VALUES ('$kodebrg','$namabrg','$kodejen','$jumlah','$harga','$kodesatuan','$tglmsk','$kodesup','$nama_foto')") or die(mysqli_error($this->koneksi));
-			echo '<script>swal("Data Berhasil Diinputkan");</script>';
-			echo "<script>location='index.php?page=inputbrg';</script>";
+			//echo '<script>swal("Data Berhasil Diinputkan");</script>';
+			//echo "<script>location='index.php?page=inputbrg';</script>";
+			echo "<script>setTimeout(function () { 
+				swal({
+					title: 'Data Berhasil Diinputkan',
+					type: 'success',
+					showConfirmButton: false,
+				});
+			},10);
+			window.setTimeout(function(){
+				window.location.replace('index.php?page=inputbrg');
+			} ,900); </script>";
 		}
 	}
 	function select_brg($kodebrg){
@@ -240,6 +266,7 @@ class data {
         $foto_lama = $data_lama['foto'];
 		if (!empty($lokasi_foto)) {
             if (file_exists("../../assets/images/barang/$foto_lama")) {
+            	//agar tidak menghapus foto default
             	if ($foto_lama != "default.png") {
             		unlink("../../assets/images/barang/$foto_lama");
             	}
@@ -247,6 +274,7 @@ class data {
             move_uploaded_file($lokasi_foto, "../../assets/images/barang/$nama_foto");
             $this->koneksi->query("UPDATE barang SET namabrg='$namabrg',kodejen='$kodejen',jumlah='$jumlah',harga='$harga',kodesatuan='$kodesatuan',tglmsk='$tglmsk',kodesup='$kodesup',foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
 		} else {
+			//jika inputan foto kosong, maka tetap menggunakan file foto sebelumnya
             if (empty($nama_foto)) {
             	$nama_foto=$foto_lama;
             }
@@ -296,8 +324,18 @@ class data {
 				}
 				$this->koneksi->query("UPDATE barang SET foto='$nama_foto' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
 			}
-			echo '<script>swal("Berhasil Menginputkan Data")</script>';
-			echo "<script>location='index.php?page=penerimaan';</script>";
+			//echo '<script>swal("Berhasil Menginputkan Data")</script>';
+			//echo "<script>location='index.php?page=penerimaan';</script>";
+			echo "<script>setTimeout(function () { 
+				swal({
+					title: 'Data Berhasil Diinputkan',
+					type: 'success',
+					showConfirmButton: false,
+				});
+			},10);
+			window.setTimeout(function(){
+				window.location.replace('index.php?page=penerimaan');
+			} ,900); </script>";
 		}			
 	}
 
@@ -318,8 +356,18 @@ class data {
 		} else {
 			$this->koneksi->query("INSERT INTO brgkeluar(kodekeluar,kodemasuk,tglkeluar,jumlah,ket) VALUES ('$kodekeluar','$kodemasuk','$tglkeluar','$jumlah','$ket')") or die(mysqli_error($this->koneksi));
 			$this->koneksi->query("UPDATE brgmasuk SET jumlah=jumlah-'$jumlah' WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
-			echo '<script>swal("Berhasil Menginputkan Data")</script>';
-			echo "<script>location='index.php?page=pemakaian';</script>";
+			//echo '<script>swal("Berhasil Menginputkan Data")</script>';
+			//echo "<script>location='index.php?page=pemakaian';</script>";
+			echo "<script>setTimeout(function () { 
+				swal({
+					title: 'Data Berhasil Diinputkan',
+					type: 'success',
+					showConfirmButton: false,
+				});
+			},10);
+			window.setTimeout(function(){
+				window.location.replace('index.php?page=pemakaian');
+			} ,900); </script>";
 		}
 	}
 
@@ -340,8 +388,18 @@ class data {
 				});</script>";
 		} else {
 			$this->koneksi->query("INSERT INTO satuan(kodesatuan,namasatuan) VALUES ('$kodesatuan','$namasatuan')") or die(mysqli_error($this->koneksi));
-			echo '<script>swal("Data Berhasil Diinputkan");</script>';
-			echo "<script>location='index.php?page=satuan';</script>";
+			//echo '<script>swal("Data Berhasil Diinputkan");</script>';
+			//echo "<script>location='index.php?page=satuan';</script>";
+			echo "<script>setTimeout(function () { 
+				swal({
+					title: 'Data Berhasil Diinputkan',
+					type: 'success',
+					showConfirmButton: false,
+				});
+			},10);
+			window.setTimeout(function(){
+				window.location.replace('index.php?page=satuan');
+			} ,900);; </script>";
 		}
 	}
 
@@ -367,8 +425,18 @@ class data {
 				});</script>";
 		} else {
 			$this->koneksi->query("INSERT INTO jenisbarang(kodejen,namajen) VALUES ('$kodejen','$namajen')") or die(mysqli_error($this->koneksi));
-			echo '<script>swal("Data Berhasil Diinputkan");</script>';
-			echo "<script>location='index.php?page=jenis';</script>";
+			//echo '<script>swal("Data Berhasil Diinputkan");</script>';
+			//echo "<script>location='index.php?page=jenis';</script>";
+			echo "<script>setTimeout(function () { 
+				swal({
+					title: 'Data Berhasil Diinputkan',
+					type: 'success',
+					showConfirmButton: false,
+				});
+			},10);
+			window.setTimeout(function(){
+				window.location.replace('index.php?page=jenis');
+			} ,900);; </script>";
 		}
 	}
 
@@ -393,8 +461,18 @@ class data {
 				});</script>";
 		} else {
 			$this->koneksi->query("INSERT INTO user(username,pass,hakakses) VALUES ('$username',PASSWORD('$pass'),'$hakakses')") or die(mysqli_error($this->koneksi));
-			echo '<script>swal("Input Data Berhasil")</script>';
-			echo "<script>location='index.php?page=admin';</script>";
+			//echo '<script>swal("Input Data Berhasil")</script>';
+			//echo "<script>location='index.php?page=admin';</script>";
+			echo "<script>setTimeout(function () { 
+				swal({
+					title: 'Data Berhasil Diinputkan',
+					type: 'success',
+					showConfirmButton: false,
+				});
+			},10);
+			window.setTimeout(function(){
+				window.location.replace('index.php?page=admin');
+			} ,900); </script>";
 		}
 	}
 
