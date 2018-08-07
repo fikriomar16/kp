@@ -201,6 +201,14 @@ class data {
 		return $data;
 	}
 
+	function showdetbrg(){
+		$select = $this->koneksi->query("SELECT barang.kodebrg, barang.namabrg, jenisbarang.namajen, barang.jumlah, barang.harga, satuan.namasatuan, barang.tglmsk, supplier.namasup, barang.foto from barang INNER JOIN jenisbarang ON barang.kodejen = jenisbarang.kodejen INNER JOIN satuan ON barang.kodesatuan = satuan.kodesatuan INNER JOIN supplier ON barang.kodesup = supplier.kodesup;");
+		while ($fetch = $select->fetch_assoc()) {
+			$data[] = $fetch;
+		}
+		return $data;
+	}
+
 	function showbrgmasuk(){
 		$select = $this->koneksi->query("SELECT brgmasuk.kodemasuk,brgmasuk.tglmasuk,barang.namabrg,brgmasuk.jumlah,satuan.namasatuan FROM brgmasuk INNER JOIN barang ON brgmasuk.kodebrg = barang.kodebrg INNER JOIN satuan ON barang.kodesatuan = satuan.kodesatuan WHERE brgmasuk.jumlah!='0';");
 		while ($fetch = $select->fetch_assoc()) {

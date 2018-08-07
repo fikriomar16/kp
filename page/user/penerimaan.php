@@ -9,6 +9,9 @@ if (!$query) {
 	function showmodalmasuk() {
 		$('#modalmasuk').modal('show');
 	}
+	function modalbarang() {
+		$('#modalbrg').modal('show');
+	}
 	function showmodaldel(kodemasuk,tglmasuk,getkodebrg,kodebrg,jumlah){
 		$('#delkodemasuk').val(kodemasuk);
 		$('#delkodemasuk2').val(kodemasuk);
@@ -46,6 +49,9 @@ if (!$query) {
 	<h4>Form Penerimaan Barang</h4>
 </center>
 <div class="container-fluid mb-auto">
+	<button type="button" class="btn btn-sm mb-2 btn-info" onclick="modalbarang();" data-toggle="tooltip" data-placement="left" title="Lihat Data Barang">
+		<i class="fa fa-th-list"></i>&nbsp;Data Barang
+	</button>
 	<button type="button" class="btn btn-info btn-sm mb-2 float-right" onclick="showmodalmasuk();" data-toggle="tooltip" data-placement="left" title="Tambah Data">
 		<i class="fa fa-plus-circle"></i>&nbsp;Tambah
 	</button>
@@ -284,6 +290,59 @@ if (!$query) {
 						</button>
 					</div>
 				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modalbrg" tabindex="-1" role="dialog" aria-labelledby="DialogModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-info text-white">
+				<h5 class="modal-title text-center col-12" id="modaltitlebrg">Daftar Barang</h5>
+			</div>
+			<div class="modal-body">
+				<form method="POST" id="formbrg">
+					<div class="table-responsive">
+						<table class="table table-hover table-sm table-striped" id="tabdetbrg">
+							<thead class="thead-light">
+								<tr>
+									<th>No</th>
+									<th>Kode</th>
+									<th>Nama</th>
+									<th>Jns</th>
+									<th>Jml</th>
+									<th>Sat</th>
+									<th>Harga</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								$i = 1;
+								$detbrg = $data->showdetbrg();
+								foreach ($detbrg as $key => $value):
+								?>
+								<tr>
+									<td><?php echo $i;?></td>
+									<td><?php echo $value['kodebrg'];?></td>
+									<td><?php echo $value['namabrg'];?></td>
+									<td><?php echo $value['namajen'];?></td>
+									<td><?php echo $value['jumlah'];?></td>
+									<td><?php echo $value['namasatuan'];?></td>
+									<td><?php echo "Rp. ".number_format($value['harga'], 0, ',', '.'); ?></td>
+								</tr>
+								<?php
+								$i++;
+								endforeach;
+								?>
+							</tbody>
+						</table>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer form-group">
+				<button class="btn btn-sm btn-info" type="submit" data-dismiss="modal">
+					<i class="fa fa-check"></i>&nbsp;OK
+				</button>
 			</div>
 		</div>
 	</div>

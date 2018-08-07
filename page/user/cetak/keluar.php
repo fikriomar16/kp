@@ -64,7 +64,7 @@ $result = mysqli_fetch_array($query);
 				<tfoot>
 					<tr>
 						<td colspan="7" align="right">Total :</td>
-						<td colspan="2"><?php echo number_format($total, 0, ',', '.'); ?></td>
+						<td colspan="2"><?php echo "Rp. ".number_format($total, 0, ',', '.'); ?></td>
 					</tr>
 				</tfoot>
 			</table>

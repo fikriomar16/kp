@@ -164,6 +164,7 @@ if (!isset($_SESSION['id'])) {
 			$('[data-toggle="tooltip"]').tooltip();
 			$('#tabbrgmasuk').DataTable();
 			$('#tabbrgkeluar').DataTable();
+			$('#tabdetbrg').DataTable();
 		});
 		$("#menu-toggle").click(function(e) {
 			e.preventDefault();
