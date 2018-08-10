@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 30, 2018 at 04:11 AM
+-- Generation Time: Aug 11, 2018 at 04:36 AM
 -- Server version: 5.7.22-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -43,8 +43,7 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`kodebrg`, `namabrg`, `kodejen`, `jumlah`, `harga`, `kodesatuan`, `tglmsk`, `kodesup`, `foto`) VALUES
-('a', 'a', 'jen000', 0, 1, 'sat000', '2018-06-24', 'sup007', '33835987_2086325355026411_4733670266524139520_n.jpg'),
-('asal', 'asal', 'jen002', 1, 1000, 'sat000', '2018-06-24', 'sup009', '36913593_2055544388107799_9066492708486381568_o.jpg'),
+('Asal', 'Asal', 'jen009', 5, 1000, 'sat000', '2018-08-11', '-', '38294479_2172939136270996_7714635882166222848_o.jpg'),
 ('brg001', 'Komix', 'jen000', 50, 30000, 'sat001', '2018-04-02', 'sup001', 'komix.jpg'),
 ('brg002', 'Super Pell', 'jen004', 45, 10000, 'sat000', '2018-04-02', 'sup004', 'super-pell.jpg'),
 ('brg003', 'Pulpen', 'jen003', 60, 4000, 'sat000', '2018-04-02', 'sup001', 'pulpen1.jpg'),
@@ -55,7 +54,8 @@ INSERT INTO `barang` (`kodebrg`, `namabrg`, `kodejen`, `jumlah`, `harga`, `kodes
 ('brg008', 'Karet Penghapus', 'jen003', 15, 15000, 'sat001', '2018-04-02', 'sup000', 'penghapus.jpg'),
 ('brg009', 'Pisau Bedah', 'jen005', 50, 15000, 'sat000', '2018-04-02', 'sup003', 'pisaubedah.jpg'),
 ('brg010', 'Sapu', 'jen004', 10, 15000, 'sat000', '2018-04-02', 'sup001', 'sapuijuk.jpg'),
-('brg011', 'Meja', 'jen009', 5, 30000, 'sat005', '2018-05-02', 'sup004', 'fluidicon.png');
+('brg011', 'Meja', 'jen009', 5, 30000, 'sat005', '2018-05-02', 'sup004', 'fluidicon.png'),
+('brg012', 'Sabun Lifebuoy', 'jen004', 5, 2500, 'sat000', '2018-06-24', '-', 'stegano.png');
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ CREATE TABLE `brgmasuk` (
 --
 
 INSERT INTO `brgmasuk` (`kodemasuk`, `tglmasuk`, `kodebrg`, `jumlah`) VALUES
-('asal', '2018-06-24', 'a', 1),
+('Asal', '2018-08-11', 'Asal', 5),
 ('msk000', '2018-07-01', 'brg005', 5),
 ('msk001', '2018-07-01', 'brg009', 40),
 ('msk002', '2018-07-01', 'brg001', 50),
@@ -203,6 +203,7 @@ CREATE TABLE `supplier` (
 --
 
 INSERT INTO `supplier` (`kodesup`, `namasup`, `alamat`, `telp`, `kontak`, `ket`) VALUES
+('-', '-', '-', 0, '-', 'Beli Sendiri'),
 ('sup000', 'CV Sukar Maju', 'Sleman, Yogyakarta', 1234567890, 'Saya', 'Penyuplai'),
 ('sup001', 'CV Asal Bikin', 'Semarang', 987654321, 'Entah', 'Asal'),
 ('sup002', 'PT Karya Palsu', 'Bandung', 1357924680, 'Owner', 'Palsu'),
