@@ -41,8 +41,6 @@ if (!$query) {
 	}
 	if (isset($_POST['del_jen'])) {
 		$data->del_jen($_POST['delkodejen']);
-		echo '<script>swal("Data Berhasil Dihapus");</script>';
-		echo "<script>location='index.php?page=jenis';</script>";
 	}
 	?>
 	<div class="table-responsive">

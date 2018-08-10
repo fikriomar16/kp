@@ -20,6 +20,19 @@ if (!$query) {
 		$('#modaldel').modal('show');
 	}
 </script>
+<style type="text/css">
+input:invalid + span:after {
+	content: '✖';
+	color: #f00;
+	padding-left: 5px;
+}
+
+input:valid + span:after {
+	content: '✓';
+	color: #26b72b;
+	padding-left: 5px;
+}
+</style>
 <center>
 	<h4>Form Pemakaian Barang</h4>
 </center>
@@ -115,7 +128,7 @@ if (!$query) {
 						</div>
 						<div class="col-2">
 							<div class="form-group">
-								<input type="number" name="jumlah" id="jumlah" class="form-control text-center" placeholder="Jumlah" required>
+								<input type="number" name="jumlah" id="jumlah" class="form-control text-center" min="0" placeholder="Jumlah" data-toggle="tooltip" data-placement="top" title="Inputan tidak boleh melebihi jumlah stok !!" required>
 							</div>
 						</div>
 					</div>

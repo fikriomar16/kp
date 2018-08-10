@@ -41,8 +41,6 @@ if (!$query) {
 	}
 	if (isset($_POST['del_sat'])) {
 		$data->del_sat($_POST['delkodesatuan']);
-		echo '<script>swal("Data Berhasil Dihapus");</script>';
-		echo "<script>location='index.php?page=satuan';</script>";
 	}
 	?>
 	<div class="table-responsive">

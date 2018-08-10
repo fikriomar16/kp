@@ -61,8 +61,6 @@ if (!$query) {
 	}
 	if (isset($_POST['del_brgin'])) {
 		$data->del_brgin($_POST['delkodemasuk'],$_POST['getkodebrg'],$_POST['deljumlah']);
-		echo '<script>swal("Berhasil Menghapus Data")</script>';
-		echo "<script>location='index.php?page=penerimaan';</script>";
 	}
 	?>
 	<div class="table-responsive">
@@ -145,7 +143,7 @@ if (!$query) {
 						</div>
 						<div class="col-3">
 							<div class="form-group">
-								<input type="number" name="jumlah" id="jumlah" class="form-control text-center" placeholder="Jml" required>
+								<input type="number" name="jumlah" id="jumlah" min="0" class="form-control text-center" placeholder="Jml" required>
 							</div>
 						</div>
 					</div>

@@ -70,8 +70,6 @@ if (!$query) {
 	}
 	if (isset($_POST['del_brg'])) {
 		$data->del_brg($_POST['delkodebrg']);
-		echo '<script>swal("Data Berhasil Dihapus");</script>';
-		echo "<script>location='index.php?page=inputbrg';</script>";
 	}
 	?>
 	<div class="table-responsive">
@@ -161,7 +159,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col-4">
 							<div class="form-group">
-								<input type="number" name="jumlah" class="form-control text-center" id="jumlah" placeholder="Jumlah" required>
+								<input type="number" name="jumlah" class="form-control text-center" id="jumlah" placeholder="Jumlah" min="0" required>
 							</div>
 						</div>
 						<div class="col">
@@ -261,7 +259,7 @@ if (!$query) {
 					<div class="row">
 						<div class="col-3">
 							<div class="form-group">
-								<input type="number" name="edtjumlah" class="form-control text-center" id="edtjumlah" placeholder="Jumlah" required>
+								<input type="number" name="edtjumlah" class="form-control text-center" id="edtjumlah" placeholder="Jumlah" min="0" required>
 							</div>
 						</div>
 						<div class="col">

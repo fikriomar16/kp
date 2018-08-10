@@ -60,8 +60,6 @@ if (!$query) {
 	}
 	if (isset($_POST['del_sup'])) {
 		$data->del_sup($_POST['delkodesup']);
-		echo '<script>swal("Data Berhasil Dihapus");</script>';
-		echo "<script>location='index.php?page=supplier';</script>";
 	}
 	?>
 	<div class="table-responsive">

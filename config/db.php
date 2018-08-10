@@ -118,7 +118,7 @@ class data {
 				type: 'warning',
 				showConfirmButton: false,
 				timer: 900,
-				});</script>";
+			});</script>";
 		} else {
 			$this->koneksi->query("INSERT INTO supplier(kodesup,namasup,alamat,telp,kontak,ket) VALUES ('$kodesup','$namasup','$alamat','$telp','$kontak','$ket')") or die(mysqli_error($this->koneksi));
 			//echo '<script>swal("Data Berhasil Diinputkan");</script>';
@@ -141,7 +141,19 @@ class data {
 	}
 
 	function del_sup($kodesup){
-		$this->koneksi->query("DELETE FROM supplier WHERE kodesup='$kodesup'") or die(mysqli_error($this->koneksi));
+		$cek = $this->koneksi->query("SELECT * FROM supplier INNER JOIN barang ON supplier.kodesup = barang.kodesup WHERE supplier.kodesup='$kodesup'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sedang Digunakan',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+			});</script>";
+		} else {
+			$this->koneksi->query("DELETE FROM supplier WHERE kodesup='$kodesup'") or die(mysqli_error($this->koneksi));
+			echo '<script>swal("Data Berhasil Dihapus");</script>';
+			echo "<script>location='index.php?page=supplier';</script>";
+		}
 	}
 
 	function terima($sup,$bulan){
@@ -225,6 +237,14 @@ class data {
 		return $data;
 	}
 
+	function showjmlmsk($kodemasuk){
+		$select = $this->koneksi->query("SELECT jumlah FROM brgmasuk WHERE kodemasuk='$kodemasuk'");
+		while ($fetch = $select->fetch_assoc()) {
+			$data[] = $fetch;
+		}
+		return $data;
+	}
+
 	function add_brg($kodebrg,$namabrg,$kodejen,$jumlah,$harga,$kodesatuan,$tglmsk,$kodesup,$foto){
 		$cek = $this->koneksi->query("SELECT * FROM barang WHERE kodebrg='$kodebrg'");
 		if ($cek->num_rows>0) {
@@ -233,7 +253,7 @@ class data {
 				type: 'warning',
 				showConfirmButton: false,
 				timer: 900,
-				});</script>";
+			});</script>";
 		} else {
 			$nama_foto=$foto['name'];
 			$lokasi_foto=$foto['tmp_name'];
@@ -290,16 +310,30 @@ class data {
 		}
 	}
 	function del_brg($kodebrg){
-		$data_lama = $this->select_brg($kodebrg);
-		$foto_lama = $data_lama['foto'];
-		if (file_exists("../../assets/images/barang/$foto_lama")) {
-			if ($foto_lama != "default.png") {
-				unlink("../../assets/images/barang/$foto_lama");
-			}
-			$this->koneksi->query("DELETE FROM barang WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+		$cek = $this->koneksi->query("SELECT * FROM barang INNER JOIN brgmasuk ON barang.kodebrg = brgmasuk.kodebrg WHERE barang.kodebrg='$kodebrg'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sedang Digunakan',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+			});</script>";
 		} else {
-			$this->koneksi->query("DELETE FROM barang WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
-		}
+			$data_lama = $this->select_brg($kodebrg);
+			$foto_lama = $data_lama['foto'];
+			if (file_exists("../../assets/images/barang/$foto_lama")) {
+				if ($foto_lama != "default.png") {
+					unlink("../../assets/images/barang/$foto_lama");
+				}
+				$this->koneksi->query("DELETE FROM barang WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+				echo '<script>swal("Data Berhasil Dihapus");</script>';
+				echo "<script>location='index.php?page=inputbrg';</script>";
+			} else {
+				$this->koneksi->query("DELETE FROM barang WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+				echo '<script>swal("Data Berhasil Dihapus");</script>';
+				echo "<script>location='index.php?page=inputbrg';</script>";
+			}
+		}	
 	}
 	function add_brgin($kodemasuk,$tglmasuk,$kodebrg,$jumlah,$foto){
 		$cek = $this->koneksi->query("SELECT*FROM brgmasuk WHERE kodemasuk='$kodemasuk'");
@@ -309,7 +343,7 @@ class data {
 				type: 'warning',
 				showConfirmButton: false,
 				timer: 900,
-				});</script>";
+			});</script>";
 		} else {
 			error_reporting(0); 
 			$nama_foto=$foto['name'];
@@ -348,8 +382,20 @@ class data {
 	}
 
 	function del_brgin($kodemasuk,$kodebrg,$jumlah){
-		$this->koneksi->query("UPDATE barang SET jumlah=jumlah+'$jumlah' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
-		$this->koneksi->query("DELETE FROM brgmasuk WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
+		$cek = $this->koneksi->query("SELECT * FROM brgmasuk INNER JOIN brgkeluar ON brgmasuk.kodemasuk = brgkeluar.kodemasuk WHERE brgmasuk.kodemasuk='$kodemasuk'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sedang Digunakan',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+			});</script>";
+		} else {
+			$this->koneksi->query("UPDATE barang SET jumlah=jumlah+'$jumlah' WHERE kodebrg='$kodebrg'") or die(mysqli_error($this->koneksi));
+			$this->koneksi->query("DELETE FROM brgmasuk WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
+			echo '<script>swal("Berhasil Menghapus Data")</script>';
+			echo "<script>location='index.php?page=penerimaan';</script>";
+		}
 	}
 
 	function add_brgout($kodekeluar,$kodemasuk,$tglkeluar,$jumlah,$ket){
@@ -360,7 +406,7 @@ class data {
 				type: 'warning',
 				showConfirmButton: false,
 				timer: 900,
-				});</script>";
+			});</script>";
 		} else {
 			$this->koneksi->query("INSERT INTO brgkeluar(kodekeluar,kodemasuk,tglkeluar,jumlah,ket) VALUES ('$kodekeluar','$kodemasuk','$tglkeluar','$jumlah','$ket')") or die(mysqli_error($this->koneksi));
 			$this->koneksi->query("UPDATE brgmasuk SET jumlah=jumlah-'$jumlah' WHERE kodemasuk='$kodemasuk'") or die(mysqli_error($this->koneksi));
@@ -393,7 +439,7 @@ class data {
 				type: 'warning',
 				showConfirmButton: false,
 				timer: 900,
-				});</script>";
+			});</script>";
 		} else {
 			$this->koneksi->query("INSERT INTO satuan(kodesatuan,namasatuan) VALUES ('$kodesatuan','$namasatuan')") or die(mysqli_error($this->koneksi));
 			//echo '<script>swal("Data Berhasil Diinputkan");</script>';
@@ -418,7 +464,19 @@ class data {
 
 	function del_sat($kodesatuan)
 	{
-		$this->koneksi->query("DELETE FROM satuan WHERE kodesatuan='$kodesatuan'") or die(mysqli_error($this->koneksi));
+		$cek = $this->koneksi->query("SELECT * FROM satuan INNER JOIN barang ON satuan.kodesatuan = barang.kodesatuan WHERE satuan.kodesatuan='$kodesatuan'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sedang Digunakan',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+			});</script>";
+		} else {
+			$this->koneksi->query("DELETE FROM satuan WHERE kodesatuan='$kodesatuan'") or die(mysqli_error($this->koneksi));
+			echo '<script>swal("Data Berhasil Dihapus");</script>';
+			echo "<script>location='index.php?page=satuan';</script>";
+		}
 	}
 
 	function add_jen($kodejen,$namajen)
@@ -430,7 +488,7 @@ class data {
 				type: 'warning',
 				showConfirmButton: false,
 				timer: 900,
-				});</script>";
+			});</script>";
 		} else {
 			$this->koneksi->query("INSERT INTO jenisbarang(kodejen,namajen) VALUES ('$kodejen','$namajen')") or die(mysqli_error($this->koneksi));
 			//echo '<script>swal("Data Berhasil Diinputkan");</script>';
@@ -455,7 +513,19 @@ class data {
 
 	function del_jen($kodejen)
 	{
-		$this->koneksi->query("DELETE FROM jenisbarang WHERE kodejen='$kodejen'") or die(mysqli_error($this->koneksi));
+		$cek = $this->koneksi->query("SELECT * FROM jenisbarang INNER JOIN barang ON jenisbarang.kodejen = barang.kodejen WHERE jenisbarang.kodejen='$kodejen'");
+		if ($cek->num_rows>0) {
+			echo "<script>swal({
+				title: 'Data Sedang Digunakan',
+				type: 'warning',
+				showConfirmButton: false,
+				timer: 900,
+			});</script>";
+		} else {
+			$this->koneksi->query("DELETE FROM jenisbarang WHERE kodejen='$kodejen'") or die(mysqli_error($this->koneksi));
+			echo '<script>swal("Data Berhasil Dihapus");</script>';
+			echo "<script>location='index.php?page=jenis';</script>";
+		}
 	}
 
 	function add_user($username,$pass,$hakakses){
@@ -466,7 +536,7 @@ class data {
 				type: 'warning',
 				showConfirmButton: false,
 				timer: 900,
-				});</script>";
+			});</script>";
 		} else {
 			$this->koneksi->query("INSERT INTO user(username,pass,hakakses) VALUES ('$username',PASSWORD('$pass'),'$hakakses')") or die(mysqli_error($this->koneksi));
 			//echo '<script>swal("Input Data Berhasil")</script>';
